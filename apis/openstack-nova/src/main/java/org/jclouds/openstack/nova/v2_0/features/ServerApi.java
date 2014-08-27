@@ -145,7 +145,7 @@ public interface ServerApi {
    @POST
    @Unwrap
    @MapBinder(CreateServerOptions.class)
-   ServerCreated create(@PayloadParam("name") String name, @PayloadParam("imageRef") String imageRef,
+   ServerCreated create(@PayloadParam("name") String name, @Nullable @PayloadParam("imageRef") String imageRef,
          @PayloadParam("flavorRef") String flavorRef, CreateServerOptions... options);
 
    /**
@@ -362,7 +362,6 @@ public interface ServerApi {
     *
     * @param id
     *           id of the image
-    * @param metadata
     *           a Map containing the metadata
     * @return the value or null if not present
     */
