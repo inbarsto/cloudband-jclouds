@@ -221,8 +221,8 @@ public class Stack {
       this.stackName = stackName;
       this.description = description;
       this.parameters = parameters == null ? ImmutableMap.<String, String>of() : ImmutableMap.copyOf(parameters);
-      this.creationTime = checkNotNull(creationTime, "creationTime");
-      this.stackStatus = checkNotNull(stackStatus, "stackStatus");
+      this.creationTime = creationTime;
+      this.stackStatus = stackStatus;
       this.stackStatusReason = stackStatusReason;
       this.outputs = outputs == null ? ImmutableMap.<String, String>of() : ImmutableMap.copyOf(outputs);
       this.updateTime = updateTime;
