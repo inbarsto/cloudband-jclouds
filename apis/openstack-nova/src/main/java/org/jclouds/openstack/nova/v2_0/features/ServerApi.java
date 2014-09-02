@@ -40,6 +40,7 @@ import org.jclouds.Fallbacks.VoidOnNotFoundOr404;
 import org.jclouds.collect.PagedIterable;
 import org.jclouds.fallbacks.MapHttp4xxCodesToExceptions;
 import org.jclouds.javax.annotation.Nullable;
+import org.jclouds.openstack.nova.v2_0.options.ListServerOptions;
 import org.jclouds.openstack.v2_0.domain.PaginatedCollection;
 import org.jclouds.openstack.keystone.v2_0.KeystoneFallbacks.EmptyPaginatedCollectionOnNotFoundOr404;
 import org.jclouds.openstack.keystone.v2_0.filters.AuthenticateRequest;
@@ -90,7 +91,7 @@ public interface ServerApi {
    @GET
    @ResponseParser(ParseServers.class)
    @Fallback(EmptyPaginatedCollectionOnNotFoundOr404.class)
-   PaginatedCollection<Resource> list(PaginationOptions options);
+   PaginatedCollection<Resource> list(ListServerOptions options);
 
    /**
     * List all servers (all details)
@@ -110,7 +111,7 @@ public interface ServerApi {
    @Path("/detail")
    @ResponseParser(ParseServerDetails.class)
    @Fallback(EmptyPaginatedCollectionOnNotFoundOr404.class)
-   PaginatedCollection<Server> listInDetail(PaginationOptions options);
+   PaginatedCollection<Server> listInDetail(ListServerOptions options);
 
    /**
     * List details of the specified server
@@ -305,6 +306,34 @@ public interface ServerApi {
    @ResponseParser(ParseImageIdFromLocationHeader.class)
    @Fallback(MapHttp4xxCodesToExceptions.class)
    String createImageFromServer(@PayloadParam("name") String name, @PathParam("id") String id);
+
+   /**
+    * Add a security group to a server.
+    *
+    * @param id
+    *           id of the server
+    * @param secGroupName
+    *           name of the security group
+    */
+   @POST
+   @Path("/{id}/action")
+   @Consumes(MediaType.APPLICATION_JSON)
+   @Produces(MediaType.APPLICATION_JSON)
+   @Payload("%7B\"addSecurityGroup\":%7B\"name\":\"{secGroupName}\"%7D%7D")
+   void addSecurityGroup(@PathParam("id") String id, @PayloadParam("secGroupName") String secGroupName);
+
+   /**
+    * Remove a security group from a server
+    *
+    * @param id           id of the server
+    * @param secGroupName name of the security group
+    */
+   @POST
+   @Path("/{id}/action")
+   @Consumes(MediaType.APPLICATION_JSON)
+   @Produces(MediaType.APPLICATION_JSON)
+   @Payload("%7B\"removeSecurityGroup\":%7B\"name\":\"{secGroupName}\"%7D%7D")
+   void removeSecurityGroup(@PathParam("id") String id, @PayloadParam("secGroupName") String secGroupName);
 
    /**
     * List all metadata for a server.
