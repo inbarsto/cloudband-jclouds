@@ -27,6 +27,7 @@ import javax.inject.Singleton;
 
 import org.jclouds.byon.Node;
 import org.jclouds.byon.domain.YamlNode;
+import org.jclouds.util.Closeables2;
 import org.yaml.snakeyaml.Loader;
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
@@ -102,7 +103,7 @@ public class NodesFromYamlStream implements Function<ByteSource, LoadingCache<St
       } catch (IOException ioe) {
          throw Throwables.propagate(ioe);
       } finally {
-         Closeables.closeQuietly(in);
+            Closeables2.closeQuietly(in);
       }
       checkState(config != null, "missing config: class");
       checkState(config.nodes != null, "missing nodes: collection");
