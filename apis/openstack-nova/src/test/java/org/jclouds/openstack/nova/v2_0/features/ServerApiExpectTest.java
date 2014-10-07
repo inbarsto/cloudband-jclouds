@@ -403,6 +403,26 @@ public class ServerApiExpectTest extends BaseNovaApiExpectTest {
       }
    }
 
+   public void testGetConsolForServerWhenResponseIs2xx() throws Exception {
+      String serverId = "123";
+      HttpRequest getServerCosole = HttpRequest.builder()
+            .method("POST")
+            .endpoint("https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2/3456/servers/" + serverId + "/action")
+            .addHeader("Accept", "application/json")
+            .addHeader("X-Auth-Token", authToken)
+            .payload(payloadFromStringWithContentType(
+                  "{\"os-getVNCConsole\":{\"type\":\"novnc\"}}", "application/json"))
+            .build();
+
+      HttpResponse getConsoleResponse = HttpResponse.builder().statusCode(200)
+            .payload(payloadFromResource("/server_console.json")).build();
+
+      NovaApi apiWhenServerExists = requestsSendResponses(keystoneAuthWithUsernameAndPasswordAndTenantName,
+            responseWithKeystoneAccess, getServerCosole, getConsoleResponse);
+
+      apiWhenServerExists.getServerApiForZone("az-1.region-a.geo-1").getVmConsole(serverId);
+   }
+
    public void testListMetadataWhenResponseIs2xx() throws Exception {
       String serverId = "123";
       HttpRequest getMetadata = HttpRequest.builder()

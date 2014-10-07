@@ -189,6 +189,31 @@ public class ServerApiLiveTest extends BaseNovaApiLiveTest {
       }
    }
 
+   @Test
+   public void testConsole() {
+
+      String serverId = null;
+
+      for (String regionId : zones) {
+         ServerApi serverApi = api.getServerApiForZone(regionId);
+         try {
+            serverId = createServer(regionId, null).getId();
+            Server server = serverApi.get(serverId);
+
+            assertEquals(server.getStatus(), ACTIVE);
+
+            String url = serverApi.getVmConsole(serverId);
+
+            assertNotNull(url);
+
+         } finally {
+            if (serverId != null) {
+               serverApi.delete(serverId);
+            }
+         }
+      }
+   }
+
    private Server createServer(String zoneId, String availabilityZoneId) {
       ServerApi serverApi = api.getServerApiForZone(zoneId);
 

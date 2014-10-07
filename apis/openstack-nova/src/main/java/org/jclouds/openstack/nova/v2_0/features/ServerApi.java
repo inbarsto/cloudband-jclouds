@@ -430,4 +430,17 @@ public interface ServerApi {
    @ResponseParser(ParseDiagnostics.class)
    @Fallback(AbsentOn403Or404Or500.class)
    Optional<Map<String, String>> getDiagnostics(@PathParam("id") String id);
+
+   /**
+    * get a url to connect to the server console
+    *
+    * @param id id of the server
+    */
+   @Named("server:getVmConsole")
+   @POST
+   @Path("/{id}/action")
+   @Produces(MediaType.APPLICATION_JSON)
+   @SelectJson("url")
+   @Payload("{\"os-getVNCConsole\":{\"type\":\"novnc\"}}")
+   String getVmConsole(@PathParam("id") String id);
 }

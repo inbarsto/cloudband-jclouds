@@ -1,0 +1,170 @@
+{"access": {
+    "token": {
+        "issued_at": "2014-10-07T07:07:17.405165",
+        "expires": "2014-10-08T07:07:17Z",
+        "id": "MIIQNvcNAQcCAyy2xLxvREtGR5wl1frN61PTPu+jn5ONBxs=",
+        "tenant": {
+            "id": "08ceeba03aa54847bc1fb76bb6c794ac",
+            "enabled": true,
+            "name": "inbarProject2",
+            "description": "Account inbarProject2 from CloudBand"
+        }
+    },
+    "serviceCatalog": [
+        {
+            "endpoints": [
+                {
+                    "adminURL": "http://10.45.1.11:8774/v2/08ceeba03aa54847bc1fb76bb6c794ac",
+                    "region": "RegionOne",
+                    "internalURL": "http://10.1.20.47:8774/v2/08ceeba03aa54847bc1fb76bb6c794ac",
+                    "id": "de52d8c224484fcb8fb7b871e28c1832",
+                    "publicURL": "http://10.45.1.11:8774/v2/08ceeba03aa54847bc1fb76bb6c794ac"
+                }
+            ],
+            "endpoints_links": [],
+            "type": "compute",
+            "name": "nova"
+        },
+        {
+            "endpoints": [
+                {
+                    "adminURL": "http://10.45.1.16:9696/",
+                    "region": "RegionOne",
+                    "internalURL": "http://10.1.20.152:9696/",
+                    "id": "1e9b57d4586048a69afff64ee957077a",
+                    "publicURL": "http://10.45.1.16:9696/"
+                }
+            ],
+            "endpoints_links": [],
+            "type": "network",
+            "name": "neutron"
+        },
+        {
+            "endpoints": [
+                {
+                    "adminURL": "http://os-cinder.local:8776/v2/08ceeba03aa54847bc1fb76bb6c794ac",
+                    "region": "RegionOne",
+                    "internalURL": "http://os-cinder.local:8776/v2/08ceeba03aa54847bc1fb76bb6c794ac",
+                    "id": "10fcb451d1564743bb61da62b919c398",
+                    "publicURL": "http://os-cinder.local:8776/v2/08ceeba03aa54847bc1fb76bb6c794ac"
+                }
+            ],
+            "endpoints_links": [],
+            "type": "volumev2",
+            "name": "cinder_v2"
+        },
+        {
+            "endpoints": [
+                {
+                    "adminURL": "http://10.45.1.15:9292/v1",
+                    "region": "RegionOne",
+                    "internalURL": "http://10.1.20.48:9292/v1",
+                    "id": "39bc9409a4d44dc59f4380862aa26b31",
+                    "publicURL": "http://10.45.1.15:9292/v1"
+                }
+            ],
+            "endpoints_links": [],
+            "type": "image",
+            "name": "glance"
+        },
+        {
+            "endpoints": [
+                {
+                    "adminURL": "http://10.45.1.11:8777",
+                    "region": "RegionOne",
+                    "internalURL": "http://10.1.20.47:8777",
+                    "id": "0ffdd5e2c82a4d2fb05ad222f8b75876",
+                    "publicURL": "http://10.45.1.11:8777"
+                }
+            ],
+            "endpoints_links": [],
+            "type": "metering",
+            "name": "ceilometer"
+        },
+        {
+            "endpoints": [
+                {
+                    "adminURL": "http://os-cinder.local:8000/v1/",
+                    "region": "RegionOne",
+                    "internalURL": "http://os-cinder.local:8000/v1/",
+                    "id": "29042ac2c5634db8a183d12dae62337e",
+                    "publicURL": "http://os-cinder.local:8000/v1/"
+                }
+            ],
+            "endpoints_links": [],
+            "type": "cloudformation",
+            "name": "heat-cfn"
+        },
+        {
+            "endpoints": [
+                {
+                    "adminURL": "http://10.45.1.14:8776/v1/08ceeba03aa54847bc1fb76bb6c794ac",
+                    "region": "RegionOne",
+                    "internalURL": "http://os-cinder.local:8776/v1/08ceeba03aa54847bc1fb76bb6c794ac",
+                    "id": "647092194fb64175b6c172b14fa40696",
+                    "publicURL": "http://10.45.1.14:8776/v1/08ceeba03aa54847bc1fb76bb6c794ac"
+                }
+            ],
+            "endpoints_links": [],
+            "type": "volume",
+            "name": "cinder"
+        },
+        {
+            "endpoints": [
+                {
+                    "adminURL": "http://10.45.1.11:8773/services/Admin",
+                    "region": "RegionOne",
+                    "internalURL": "http://10.1.20.47:8773/services/Cloud",
+                    "id": "0e6f5c14dd3340e78d846ba12b69d39a",
+                    "publicURL": "http://10.45.1.11:8773/services/Cloud"
+                }
+            ],
+            "endpoints_links": [],
+            "type": "ec2",
+            "name": "nova_ec2"
+        },
+        {
+            "endpoints": [
+                {
+                    "adminURL": "http://10.45.1.14:8004/v1/08ceeba03aa54847bc1fb76bb6c794ac",
+                    "region": "RegionOne",
+                    "internalURL": "http://os-cinder.local:8004/v1/08ceeba03aa54847bc1fb76bb6c794ac",
+                    "id": "563421d8db8446638dcc8cb4156e4f0c",
+                    "publicURL": "http://10.45.1.14:8004/v1/08ceeba03aa54847bc1fb76bb6c794ac"
+                }
+            ],
+            "endpoints_links": [],
+            "type": "orchestration",
+            "name": "heat"
+        },
+        {
+            "endpoints": [
+                {
+                    "adminURL": "http://10.45.1.11:35357/v2.0",
+                    "region": "RegionOne",
+                    "internalURL": "http://10.1.20.47:5000/v2.0",
+                    "id": "354a54655dff40d0a619eacb28c9d65b",
+                    "publicURL": "http://10.45.1.11:5000/v2.0"
+                }
+            ],
+            "endpoints_links": [],
+            "type": "identity",
+            "name": "keystone"
+        }
+    ],
+    "user": {
+        "username": "admin",
+        "roles_links": [],
+        "id": "447ecd8432554f95a48b4e5bcf4f4b70",
+        "roles": [
+            {
+                "name": "admin"
+            }
+        ],
+        "name": "admin"
+    },
+    "metadata": {
+        "is_admin": 0,
+        "roles": ["e877d30e80ba4e6e8d4a73403efe02a9"]
+    }
+}}
