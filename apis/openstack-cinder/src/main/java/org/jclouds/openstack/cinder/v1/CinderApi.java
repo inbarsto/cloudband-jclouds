@@ -24,6 +24,8 @@ import org.jclouds.location.functions.RegionToEndpoint;
 import org.jclouds.openstack.cinder.v1.domain.Snapshot;
 import org.jclouds.openstack.cinder.v1.domain.Volume;
 import org.jclouds.openstack.cinder.v1.domain.VolumeType;
+import org.jclouds.javax.annotation.Nullable;
+import org.jclouds.openstack.cinder.v1.extensions.AvailabilityZoneApi;
 import org.jclouds.openstack.cinder.v1.features.QuotaApi;
 import org.jclouds.openstack.cinder.v1.features.SnapshotApi;
 import org.jclouds.openstack.cinder.v1.features.VolumeApi;
@@ -126,4 +128,10 @@ public interface CinderApi extends Closeable {
    SnapshotApi getSnapshotApiForZone(
          @EndpointParam(parser = RegionToEndpoint.class) String zone);
 
+   /**
+    * provides access to availability zone features
+    */
+   @Delegate
+   AvailabilityZoneApi getAvailabilityZoneApi(
+         @EndpointParam(parser = RegionToEndpoint.class) @Nullable String zone);
 }
