@@ -84,7 +84,7 @@ public interface MuranoPackageApi {
    @Named("package:create")
    @POST
    MuranoPackage create(@Nullable @FormParam("JsonString") @ParamParser(CreatePackageOptions.class) CreatePackageOptions
-                              createPackageOptions,@PartParam(name = "file", filename="jclouds.zip") byte[] packageContent);
+                              createPackageOptions, @PartParam(name = "file", filename="package.zip") byte[] packageContent);
 
    @Named("package:download")
    @GET
