@@ -27,6 +27,8 @@ import org.jclouds.rest.ResourceAlreadyExistsException;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -120,7 +122,7 @@ public class EnvironmentApiLiveTest extends BaseMuranoApiLiveTest {
       }
    }
 
-   public void testAddApplicationDeployEnvironmentFromSessionAndListDeployments() {
+   public void testAddApplicationDeployEnvironmentFromSessionAndListDeployments() throws IOException {
       for (String region : api.getConfiguredRegions()) {
          EnvironmentApi environmentApi = api.getEnvironmentApi(region);
          Environment createdEnvironment = environmentApi.create(ENV_NAME);
@@ -130,7 +132,7 @@ public class EnvironmentApiLiveTest extends BaseMuranoApiLiveTest {
          CreatePackageOptions createPackageOptions = CreatePackageOptions.Builder
                .enabled(true)
                .isPublic(true);
-         MuranoPackage muranoPackage = muranoPackageApi.create(createPackageOptions, file);
+         MuranoPackage muranoPackage = muranoPackageApi.create(createPackageOptions, Files.readAllBytes(file.toPath()));
          AddApplicationOptions addApplicationOptions = AddApplicationOptions.Builder.muranoPackage(muranoPackage, APP_NAME, ENV_NAME);
          Session configure = environmentApi.configure(createdEnvironment.getId());
 

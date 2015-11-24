@@ -140,7 +140,7 @@ public class EnvironmentApiMockTest extends BaseMuranoApiMockTest {
           */
          assertEquals(server.getRequestCount(), 2);
          assertAuthentication(server);
-         assertRequest(server.takeRequest(), "DELETE", BASE_URI + "/v1/environments/" + TEST_ENVIRONMENT_ID);
+         assertRequest(server.takeRequest(), "DELETE", BASE_URI + "/v1/environments/" + TEST_ENVIRONMENT_ID + "?abandon=false");
 
          /*
           * Check response

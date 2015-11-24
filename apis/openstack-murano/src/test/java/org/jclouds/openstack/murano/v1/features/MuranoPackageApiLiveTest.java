@@ -25,7 +25,9 @@ import org.jclouds.openstack.murano.v1.options.ListPackagesOptions;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 
@@ -44,11 +46,13 @@ public class MuranoPackageApiLiveTest extends BaseMuranoApiLiveTest {
    List<String> categories = Collections.singletonList(TEST_CATEGORY);
 
 
-   public void testCreatePackageNoOptions() {
+   public void testCreatePackageNoOptions() throws IOException {
       for (String region : api.getConfiguredRegions()) {
          MuranoPackageApi muranoPackageApi = api.getPackageApi(region);
          String path = getClass().getResource(PACKAGE_NO_TAGS).getFile();
          File file = new File(path);
+
+         //Test create with file
          MuranoPackage muranoPackage = muranoPackageApi.create(null, file);
          assertThat(muranoPackage).isNotNull();
          assertThat(muranoPackage.getTags()).isNotNull();
@@ -62,11 +66,25 @@ public class MuranoPackageApiLiveTest extends BaseMuranoApiLiveTest {
          assertThat(muranoPackages.contains(muranoPackage));
          muranoPackageApi.delete(muranoPackage.getId());
 
+         //Test create with byte array
+         MuranoPackage muranoPackage2 = muranoPackageApi.create(null, Files.readAllBytes(file.toPath()));
+         assertThat(muranoPackage2).isNotNull();
+         assertThat(muranoPackage2.getTags()).isNotNull();
+         assertThat(muranoPackage2.getTags().isEmpty());
+         assertThat(muranoPackage2.getCategories()).isNotNull();
+         assertThat(muranoPackage2.getCategories().isEmpty());
+         assertThat(muranoPackage2.isEnabled()).isTrue();
+         assertThat(muranoPackage2.isPublic()).isFalse();
+         ImmutableList<MuranoPackage> muranoPackages2 = muranoPackageApi.list().toList();
+         assertThat(muranoPackages2).isNotNull();
+         assertThat(muranoPackages2.contains(muranoPackage2));
+         muranoPackageApi.delete(muranoPackage2.getId());
+
       }
    }
 
 
-   public void testCreatePackagesWithOptions() {
+   public void testCreatePackagesWithOptions() throws IOException {
       for (String region : api.getConfiguredRegions()) {
          CategoryApi categoryApi = api.getCategoryApi(region);
          Category category = categoryApi.create(TEST_CATEGORY);
@@ -81,7 +99,7 @@ public class MuranoPackageApiLiveTest extends BaseMuranoApiLiveTest {
                .isPublic(true)
                .categories(categories);
 
-         MuranoPackage muranoPackage = muranoPackageApi.create(createPackageOptions, file);
+         MuranoPackage muranoPackage = muranoPackageApi.create(createPackageOptions, Files.readAllBytes(file.toPath()));
          assertThat(muranoPackage).isNotNull();
          assertThat(muranoPackage.getTags()).isNotNull();
          assertThat(muranoPackage.getTags().toArray()[0]).isEqualTo(HEAT);
@@ -99,7 +117,7 @@ public class MuranoPackageApiLiveTest extends BaseMuranoApiLiveTest {
       }
    }
 
-   public void testCreateFailedPackage() {
+   public void testCreateFailedPackage() throws IOException {
       for (String region : api.getConfiguredRegions()) {
          MuranoPackageApi muranoPackageApi = api.getPackageApi(region);
          String path = getClass().getResource(PACKAGE_BAD_FORMAT).getFile();
@@ -110,7 +128,7 @@ public class MuranoPackageApiLiveTest extends BaseMuranoApiLiveTest {
                .enabled(true);
 
          try {
-            muranoPackageApi.create(createPackageOptions, file);
+            muranoPackageApi.create(createPackageOptions, Files.readAllBytes(file.toPath()));
             fail("package creation should have failed");
          } catch (IllegalStateException e) {
             assertThat(e.getMessage().contains("Incorrect package format"));
@@ -127,7 +145,7 @@ public class MuranoPackageApiLiveTest extends BaseMuranoApiLiveTest {
    }
 
 
-   public void testListPackagesByCategory() {
+   public void testListPackagesByCategory() throws IOException {
       for (String region : api.getConfiguredRegions()) {
 
          CategoryApi categoryApi = api.getCategoryApi(region);
@@ -145,12 +163,12 @@ public class MuranoPackageApiLiveTest extends BaseMuranoApiLiveTest {
          CreatePackageOptions createPackageOptionsCbms = CreatePackageOptions.Builder
                .enabled(true)
                .categories(categories);
-         MuranoPackage cbmsPackage = muranoPackageApi.create(createPackageOptionsCbms, fileCbms);
+         MuranoPackage cbmsPackage = muranoPackageApi.create(createPackageOptionsCbms, Files.readAllBytes(fileCbms.toPath()));
 
          String pathNotCbms = getClass().getResource(PACKAGE_NO_TAGS).getFile();
          File fileNotCbms = new File(pathNotCbms);
          CreatePackageOptions createPackageOptionsNotCbms = CreatePackageOptions.Builder.enabled(true);
-         MuranoPackage notCbmsPackage = muranoPackageApi.create(createPackageOptionsNotCbms, fileNotCbms);
+         MuranoPackage notCbmsPackage = muranoPackageApi.create(createPackageOptionsNotCbms, Files.readAllBytes(fileNotCbms.toPath()));
 
          List<MuranoPackage> noCbmsList = muranoPackageApi.list().toList();
          assertThat(noCbmsList).isNotNull();
@@ -169,7 +187,7 @@ public class MuranoPackageApiLiveTest extends BaseMuranoApiLiveTest {
    }
 
 
-   public void testGetPackage() {
+   public void testGetPackage() throws IOException {
 
       for (String region : api.getConfiguredRegions()) {
          MuranoPackageApi muranoPackageApi = api.getPackageApi(region);
@@ -177,7 +195,7 @@ public class MuranoPackageApiLiveTest extends BaseMuranoApiLiveTest {
                .enabled(true);
          String path = getClass().getResource(PACKAGE_WITH_TAGS).getFile();
          File file = new File(path);
-         MuranoPackage createdPackage = muranoPackageApi.create(createPackageOptions, file);
+         MuranoPackage createdPackage = muranoPackageApi.create(createPackageOptions, Files.readAllBytes(file.toPath()));
 
          MuranoPackage muranoPackage = muranoPackageApi.get(createdPackage.getId());
          assertThat(muranoPackage).isNotNull();
@@ -188,7 +206,7 @@ public class MuranoPackageApiLiveTest extends BaseMuranoApiLiveTest {
       }
    }
 
-   public void testDeletePackages() {
+   public void testDeletePackages() throws IOException {
 
       for (String region : api.getConfiguredRegions()) {
          MuranoPackageApi muranoPackageApi = api.getPackageApi(region);
@@ -196,7 +214,7 @@ public class MuranoPackageApiLiveTest extends BaseMuranoApiLiveTest {
                .enabled(true);
          String path = getClass().getResource(PACKAGE_WITH_TAGS).getFile();
          File file = new File(path);
-         MuranoPackage createdPackage = muranoPackageApi.create(createPackageOptions, file);
+         MuranoPackage createdPackage = muranoPackageApi.create(createPackageOptions, Files.readAllBytes(file.toPath()));
 
          List<MuranoPackage> muranoPackages = muranoPackageApi.list().toList();
          int numOfPackages = muranoPackages.size();
