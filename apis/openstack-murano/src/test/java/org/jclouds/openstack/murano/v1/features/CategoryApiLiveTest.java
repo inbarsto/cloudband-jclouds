@@ -17,9 +17,11 @@
 package org.jclouds.openstack.murano.v1.features;
 
 import com.google.common.collect.ImmutableList;
+import org.jclouds.http.HttpResponseException;
 import org.jclouds.openstack.murano.v1.domain.Category;
 import org.jclouds.openstack.murano.v1.domain.MuranoPackage;
 import org.jclouds.openstack.murano.v1.options.CreatePackageOptions;
+import org.jclouds.rest.ResourceAlreadyExistsException;
 import org.testng.annotations.Test;
 import org.jclouds.openstack.murano.v1.internal.BaseMuranoApiLiveTest;
 
@@ -48,10 +50,12 @@ public class CategoryApiLiveTest extends BaseMuranoApiLiveTest {
          try {
             categoryApi.create(CATEGORY_NAME);
             fail("category creation should have failed");
-         } catch (IllegalStateException e){
+         } catch (ResourceAlreadyExistsException e){
             assertThat(e.getMessage().contains("already exist"));
+         }finally {
+            categoryApi.delete(category.getId());
          }
-         categoryApi.delete(category.getId());
+
       }
    }
 

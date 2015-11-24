@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -66,6 +67,38 @@ public class MuranoPackageApiMockTest extends BaseMuranoApiMockTest {
           */
          assertThat(packages).isNotEmpty();
          assertThat(packages.size()).isEqualTo(2);
+
+      } finally {
+         server.shutdown();
+      }
+   }
+
+   public void testCreatePackageWithByteArray() throws Exception {
+      MockWebServer server = mockOpenStackServer();
+      server.enqueue(addCommonHeaders(new MockResponse().setBody(stringFromResource("/access.json"))));
+      server.enqueue(addCommonHeaders(new MockResponse().setResponseCode(200).setBody(stringFromResource("/create_package" + ".json"))));
+
+      try {
+         MuranoApi muranoApi = api(server.getUrl("/").toString(), "openstack-murano", overrides);
+         MuranoPackageApi api = muranoApi.getPackageApi("RegionOne");
+         String path = getClass().getResource(PACKAGE_NO_TAGS).getFile();
+         File file = new File(path);
+         CreatePackageOptions createPackageOptions = CreatePackageOptions.Builder.enabled(true);
+         MuranoPackage muranoPackage = api.create(createPackageOptions, Files.readAllBytes(file.toPath()));
+
+         /*
+          * Check request
+          */
+
+         assertThat(server.getRequestCount()).isEqualTo(2);
+         assertAuthentication(server);
+         assertRequest(server.takeRequest(), "POST", BASE_URI + "/v1/catalog/packages");
+
+         /*
+          *Check response
+          */
+         assertThat(muranoPackage).isNotNull();
+         assertThat(muranoPackage.getId()).isEqualTo(TEST_PACKAGE_ID);
 
       } finally {
          server.shutdown();
