@@ -197,6 +197,9 @@ public class StackApiMockTest extends BaseHeatApiMockTest {
          assertThat(stackResource.getLogicalResourceId()).isNotEmpty();
          assertThat(stackResource.getPhysicalResourceId()).isNotNull();
          assertThat(stackResource.getPhysicalResourceId()).isNotEmpty();
+         assertThat(stackResource.getAttributes()).isNotNull();
+         assertThat(stackResource.getAttributes().getStatus()).isNotNull();
+         assertThat(stackResource.getAttributes().getStatus()).isNotEmpty();
 
       } finally {
          server.shutdown();
