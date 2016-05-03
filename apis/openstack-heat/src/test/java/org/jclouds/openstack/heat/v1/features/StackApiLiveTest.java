@@ -263,6 +263,8 @@ public class StackApiLiveTest extends BaseHeatApiLiveTest {
             assertThat(stackResourceName).isNotNull();
             assertThat(stackResourceName).isNotEmpty();
             assertThat(stackResource.getStatus()).isNotEqualTo(StackResource.Status.UNRECOGNIZED);
+            assertThat(stackResource.getAttributes()).isNotNull();
+            assertThat(stackResource.getAttributes().getStatus()).isNotNull();
             StackResource resourceFromGet = stackApi.getStackResource(stackName, stack.getId(), stackResourceName);
             assertThat(resourceFromGet).isNotNull();
             assertThat(resourceFromGet.getName()).isEqualTo(stackResourceName);

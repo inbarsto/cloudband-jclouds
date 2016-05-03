@@ -16,18 +16,20 @@
         */
 package org.jclouds.openstack.heat.v1.domain;
 
-import com.google.common.base.CaseFormat;
-import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableSet;
-import org.jclouds.openstack.v2_0.domain.Link;
-import org.jclouds.openstack.v2_0.domain.Resource;
+import static com.google.common.base.Preconditions.checkNotNull;
 
-import javax.inject.Named;
 import java.beans.ConstructorProperties;
 import java.util.Date;
 import java.util.Set;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import javax.inject.Named;
+
+import org.jclouds.openstack.v2_0.domain.Link;
+import org.jclouds.openstack.v2_0.domain.Resource;
+
+import com.google.common.base.CaseFormat;
+import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableSet;
 
 /**
  * Representation of an OpenStack Heat Stack Resources.
@@ -46,22 +48,25 @@ public class StackResource extends Resource {
    private Set<String> requiredBy = ImmutableSet.of();
    @Named("resource_type")
    private final String resourceType;
-
    @Named("updated_time")
    private final Date updated;
+   @Named("attributes")
+   private Attributes attributes;
 
-
-   @ConstructorProperties({"id", "resource_name", "links", "logical_resource_id", "resource_status_reason", "updated_time", "required_by", "resource_status", "physical_resource_id", "resource_type"})
-   public StackResource(String id, String name, Set<Link> links, String logicalResourceId, String statusReason, Date updated, Set<String> requiredBy,
-                        Status status, String physicalResourceId, String resourceType) {
+   @ConstructorProperties({ "id", "resource_name", "links", "logical_resource_id", "resource_status_reason",
+         "updated_time", "required_by", "resource_status", "physical_resource_id", "resource_type", "attributes" })
+   public StackResource(String id, String name, Set<Link> links, String logicalResourceId, String statusReason,
+         Date updated, Set<String> requiredBy, Status status, String physicalResourceId, String resourceType,
+         Attributes attributes) {
       super(id, name, links);
       this.logicalResourceId = logicalResourceId;
       this.statusReason = statusReason;
-      this.requiredBy = logicalResourceId == null ? ImmutableSet.<String>of() : ImmutableSet.copyOf(requiredBy);
+      this.requiredBy = logicalResourceId == null ? ImmutableSet.<String> of() : ImmutableSet.copyOf(requiredBy);
       this.physicalResourceId = physicalResourceId;
       this.status = status;
       this.updated = updated;
       this.resourceType = resourceType;
+      this.attributes = attributes;
    }
 
    public String getLogicalResourceId() {
@@ -92,15 +97,12 @@ public class StackResource extends Resource {
       return updated;
    }
 
+   public Attributes getAttributes() {
+      return attributes;
+   }
+
    public enum Status {
-      INIT_COMPLETE, CREATE_IN_PROGRESS, CREATE_COMPLETE, CREATE_FAILED,
-      UPDATE_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_FAILED,
-      DELETE_IN_PROGRESS, DELETE_COMPLETE, DELETE_FAILED,
-      ROLLBACK_IN_PROGRESS, ROLLBACK_COMPLETE, ROLLBACK_FAILED,
-      SUSPEND_IN_PROGRESS, SUSPEND_COMPLETE, SUSPEND_FAILED,
-      RESUME_IN_PROGRESS, RESUME_COMPLETE, RESUME_FAILED,
-      CHECK_IN_PROGRESS, CHECK_COMPLETE, CHECK_FAILED,
-      UNRECOGNIZED;
+      INIT_COMPLETE, CREATE_IN_PROGRESS, CREATE_COMPLETE, CREATE_FAILED, UPDATE_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_FAILED, DELETE_IN_PROGRESS, DELETE_COMPLETE, DELETE_FAILED, ROLLBACK_IN_PROGRESS, ROLLBACK_COMPLETE, ROLLBACK_FAILED, SUSPEND_IN_PROGRESS, SUSPEND_COMPLETE, SUSPEND_FAILED, RESUME_IN_PROGRESS, RESUME_COMPLETE, RESUME_FAILED, CHECK_IN_PROGRESS, CHECK_COMPLETE, CHECK_FAILED, UNRECOGNIZED;
 
       public String value() {
          return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, name());
@@ -114,7 +116,8 @@ public class StackResource extends Resource {
       /**
        * This provides GSON enum support in jclouds.
        *
-       * @param name The string representation of this enum value.
+       * @param name
+       *            The string representation of this enum value.
        * @return The corresponding enum value.
        */
 
@@ -129,37 +132,30 @@ public class StackResource extends Resource {
 
    @Override
    public int hashCode() {
-      return Objects.hashCode(super.hashCode(), logicalResourceId, physicalResourceId, requiredBy, resourceType, status, statusReason,
-            updated);
+      return Objects.hashCode(super.hashCode(), logicalResourceId, physicalResourceId, requiredBy, resourceType,
+            status, statusReason, updated,attributes);
    }
 
    @Override
    public boolean equals(Object obj) {
-      if (this == obj) return true;
-      if (obj == null || getClass() != obj.getClass()) return false;
+      if (this == obj)
+         return true;
+      if (obj == null || getClass() != obj.getClass())
+         return false;
       StackResource that = StackResource.class.cast(obj);
-      return super.equals(that) &&
-            Objects.equal(this.logicalResourceId, that.logicalResourceId) &&
-            Objects.equal(this.physicalResourceId, that.physicalResourceId) &&
-            Objects.equal(this.requiredBy, that.requiredBy) &&
-            Objects.equal(this.resourceType, that.resourceType) &&
-            Objects.equal(this.status, that.status) &&
-            Objects.equal(this.statusReason, that.statusReason) &&
-            Objects.equal(this.updated, that.updated);
+      return super.equals(that) && Objects.equal(this.logicalResourceId, that.logicalResourceId)
+            && Objects.equal(this.physicalResourceId, that.physicalResourceId)
+            && Objects.equal(this.requiredBy, that.requiredBy)
+            && Objects.equal(this.resourceType, that.resourceType) && Objects.equal(this.status, that.status)
+            && Objects.equal(this.statusReason, that.statusReason) && Objects.equal(this.updated, that.updated)
+            && Objects.equal(this.attributes, that.attributes);
    }
 
    protected Objects.ToStringHelper string() {
-      return super.string()
-            .add("logicalResourceId", logicalResourceId)
-            .add("physicalResourceId", physicalResourceId)
-            .add("requiredBy", requiredBy)
-            .add("resourceType", resourceType)
-            .add("status", status)
-            .add("logicalResourceId", logicalResourceId)
-            .add("statusReason", statusReason)
-            .add("status", status)
-            .add("statusReason", statusReason)
-            .add("updated", updated);
+      return super.string().add("logicalResourceId", logicalResourceId).add("physicalResourceId", physicalResourceId)
+            .add("requiredBy", requiredBy).add("resourceType", resourceType).add("status", status)
+            .add("logicalResourceId", logicalResourceId).add("statusReason", statusReason).add("status", status)
+            .add("statusReason", statusReason).add("updated", updated).add("attributes", attributes);
    }
 
    @Override
@@ -184,6 +180,7 @@ public class StackResource extends Resource {
       protected Set<String> requiredBy = ImmutableSet.of();
       protected String resourceType;
       protected Date updated;
+      protected Attributes attributes;
 
       public T logicalResourceId(String logicalResourceId) {
          this.logicalResourceId = logicalResourceId;
@@ -220,22 +217,24 @@ public class StackResource extends Resource {
          return self();
       }
 
+      public T attributes(Attributes attributes) {
+         this.attributes = attributes;
+         return self();
+      }
+
       /**
        * @return A new Stack object.
        */
       public StackResource build() {
-         return new StackResource(id, name, links, logicalResourceId, statusReason, updated, requiredBy, status, physicalResourceId, resourceType);
+         return new StackResource(id, name, links, logicalResourceId, statusReason, updated, requiredBy, status,
+               physicalResourceId, resourceType, attributes);
       }
 
       public T fromStackResource(StackResource in) {
-         return this.fromResource(in)
-               .logicalResourceId(in.getLogicalResourceId())
-               .statusReason(in.getStatusReason())
-               .updated(in.getUpdated())
-               .requiredBy(in.getRequiredBy())
-               .status(in.getStatus())
-               .physicalResourceId(in.getPhysicalResourceId())
-               .resourceType(in.getResourceType());
+         return this.fromResource(in).logicalResourceId(in.getLogicalResourceId()).statusReason(in.getStatusReason())
+               .updated(in.getUpdated()).requiredBy(in.getRequiredBy()).status(in.getStatus())
+               .physicalResourceId(in.getPhysicalResourceId()).resourceType(in.getResourceType())
+               .attributes(in.getAttributes());
       }
 
    }
