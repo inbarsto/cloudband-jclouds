@@ -49,8 +49,6 @@ public class ExtensionApiLiveTest extends BaseNovaApiLiveTest {
               assertNotNull(extension.getId());
               assertNotNull(extension.getName());
               assertNotNull(extension.getDescription());
-              assertNotNull(extension.getNamespace());
-              assertNotNull(extension.getUpdated());
               assertNotNull(extension.getLinks());
            }
        }
