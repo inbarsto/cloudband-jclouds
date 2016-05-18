@@ -44,8 +44,9 @@ public class ExtensionPredicates {
       return new Predicate<Extension>() {
          @Override
          public boolean apply(Extension ext) {
+            //noinspection SimplifiableConditionalExpression
             return ext.getNamespace() == null ? false : namespace.toASCIIString().equals(
-                  ext.getNamespace().toASCIIString().replace("https", "http"));
+                    ext.getNamespace().toASCIIString().replace("https", "http"));
          }
 
          @Override
@@ -93,8 +94,8 @@ public class ExtensionPredicates {
       return new Predicate<Extension>() {
          @Override
          public boolean apply(Extension ext) {
-            return ext.getNamespace() == null ? false : (namespaceEquals(namespace).apply(ext) || namespaceAliases.contains(ext
-                  .getNamespace()));
+            //noinspection SimplifiableConditionalExpression
+            return ext.getNamespace() == null ? false : (namespaceEquals(namespace).apply(ext) || namespaceAliases.contains(ext.getNamespace()));
          }
 
          @Override
