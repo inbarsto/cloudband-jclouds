@@ -14,16 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jclouds.openstack.cinder.v1.internal;
+package org.jclouds.openstack.cinder.v2.internal;
 
-import org.jclouds.openstack.cinder.v1.CinderApi;
+import org.jclouds.apis.BaseApiLiveTest;
+import org.jclouds.openstack.cinder.v2.CinderApi;
+import org.jclouds.openstack.keystone.v2_0.config.KeystoneProperties;
+
+import java.util.Properties;
 
 /**
- * Base class for writing Volume Rest Api Expect tests
+ * Tests behavior of CinderV2Api
  */
-public class BaseCinderApiExpectTest extends BaseCinderExpectTest<CinderApi> {
+public class BaseCinderApiLiveTest extends BaseApiLiveTest<CinderApi> {
 
-    public BaseCinderApiExpectTest() {
-        super("openstack-cinder");
+    public BaseCinderApiLiveTest() {
+        provider = "openstack-cinder-v2";
+    }
+
+    @Override
+    protected Properties setupProperties() {
+        Properties props = super.setupProperties();
+        setIfTestSystemPropertyPresent(props, KeystoneProperties.CREDENTIAL_TYPE);
+        return props;
     }
 }

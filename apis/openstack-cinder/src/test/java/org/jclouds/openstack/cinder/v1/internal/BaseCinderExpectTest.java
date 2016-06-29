@@ -38,23 +38,23 @@ public class BaseCinderExpectTest<T> extends BaseRestApiExpectTest<T> {
    protected HttpRequest keystoneAuthWithAccessKeyAndSecretKeyAndTenantId;
    protected String identityWithTenantId;
 
-   public BaseCinderExpectTest() {
-      provider = "openstack-cinder";
-      keystoneAuthWithUsernameAndPassword = KeystoneFixture.INSTANCE.initialAuthWithUsernameAndPassword(identity,
-            credential);
-      keystoneAuthWithUsernameAndPasswordAndTenantName = KeystoneFixture.INSTANCE.initialAuthWithUsernameAndPasswordAndTenantName(identity,
-            credential);
-      keystoneAuthWithAccessKeyAndSecretKeyAndTenantName = KeystoneFixture.INSTANCE.initialAuthWithAccessKeyAndSecretKeyAndTenantName(identity,
-            credential);
-      keystoneAuthWithAccessKeyAndSecretKeyAndTenantId = KeystoneFixture.INSTANCE.initialAuthWithAccessKeyAndSecretKeyAndTenantId(identity,
-              credential);
-      
-      authToken = KeystoneFixture.INSTANCE.getAuthToken();
-      responseWithKeystoneAccess = KeystoneFixture.INSTANCE.responseWithAccess();
-      // now, createContext arg will need tenant prefix
-      identityWithTenantId = KeystoneFixture.INSTANCE.getTenantId() + ":" + identity;
-      identity = KeystoneFixture.INSTANCE.getTenantName() + ":" + identity;
-   }
+    public BaseCinderExpectTest(String provider) {
+        this.provider = provider;
+        keystoneAuthWithUsernameAndPassword = KeystoneFixture.INSTANCE.initialAuthWithUsernameAndPassword(identity,
+                credential);
+        keystoneAuthWithUsernameAndPasswordAndTenantName = KeystoneFixture.INSTANCE.initialAuthWithUsernameAndPasswordAndTenantName(identity,
+                credential);
+        keystoneAuthWithAccessKeyAndSecretKeyAndTenantName = KeystoneFixture.INSTANCE.initialAuthWithAccessKeyAndSecretKeyAndTenantName(identity,
+                credential);
+        keystoneAuthWithAccessKeyAndSecretKeyAndTenantId = KeystoneFixture.INSTANCE.initialAuthWithAccessKeyAndSecretKeyAndTenantId(identity,
+                credential);
+
+        authToken = KeystoneFixture.INSTANCE.getAuthToken();
+        responseWithKeystoneAccess = KeystoneFixture.INSTANCE.responseWithAccess();
+        // now, createContext arg will need tenant prefix
+        identityWithTenantId = KeystoneFixture.INSTANCE.getTenantId() + ":" + identity;
+        identity = KeystoneFixture.INSTANCE.getTenantName() + ":" + identity;
+    }
 
    @Override
    protected HttpRequestComparisonType compareHttpRequestAsType(HttpRequest input) {
