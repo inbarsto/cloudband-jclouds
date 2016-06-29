@@ -1,0 +1,34 @@
+{
+    "pools": [
+        {
+            "name": "os-glance-01@adv_zone0#adv_zone0",
+            "capabilities": {
+                "filter_function": null,
+                "goodness_function": null,
+                "timestamp": "2016-05-24T18:27:15.881131",
+                "volume_backend_name": "adv_zone0",
+                "free_capacity_gb": 2980,
+                "driver_version": "1.1.0",
+                "total_capacity_gb": 3054,
+                "reserved_percentage": 0,
+                "vendor_name": "Open Source",
+                "storage_protocol": "ceph"
+            }
+        },
+        {
+            "name": "os-glance-00@default-rbd#default-rbd",
+            "capabilities": {
+                "filter_function": null,
+                "goodness_function": null,
+                "timestamp": "2016-05-24T18:27:29.579027",
+                "volume_backend_name": "default-rbd",
+                "free_capacity_gb": 2980,
+                "driver_version": "1.1.0",
+                "total_capacity_gb": 3002,
+                "reserved_percentage": 0,
+                "vendor_name": "Open Source",
+                "storage_protocol": "ceph"
+            }
+        }
+    ]
+}
