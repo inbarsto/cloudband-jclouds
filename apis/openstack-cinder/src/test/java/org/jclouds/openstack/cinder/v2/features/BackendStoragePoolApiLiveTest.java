@@ -18,21 +18,24 @@ package org.jclouds.openstack.cinder.v2.features;
 
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
+import org.jclouds.openstack.cinder.v1.internal.BaseCinderApiLiveTest;
+import org.jclouds.openstack.cinder.v2.CinderApi;
 import org.jclouds.openstack.cinder.v2.domain.BackendStoragePool;
-import org.jclouds.openstack.cinder.v2.internal.BaseCinderApiLiveTest;
+import org.jclouds.openstack.cinder.v2.domain.PoolCapability;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 
 @Test(groups = "live", testName = "BackendStoragePoolApiLiveTest", singleThreaded = true)
-public class BackendStoragePoolApiLiveTest extends BaseCinderApiLiveTest {
+public class BackendStoragePoolApiLiveTest extends BaseCinderApiLiveTest<CinderApi> {
 
     private BackendStoragePoolsApi backendStoragePoolsApi;
 
     public BackendStoragePoolApiLiveTest() {
-        super();
-        provider = "openstack-cinder-v2";
+        super("openstack-cinder-v2");
     }
 
     @BeforeClass(groups = {"integration", "live"})
@@ -42,9 +45,26 @@ public class BackendStoragePoolApiLiveTest extends BaseCinderApiLiveTest {
         backendStoragePoolsApi = api.getBackendStoragePoolsApi(zone);
     }
 
-    public void testGetList() {
+    public void testGetListWithDetail() {
         FluentIterable<? extends BackendStoragePool> pools = backendStoragePoolsApi.list(true);
         assertFalse(pools.isEmpty());
+        BackendStoragePool pool = pools.get(0);
+        assertNotNull(pool.getName());
+        PoolCapability poolCapability = pool.getPoolCapability();
+        assertNotNull(poolCapability);
+        assertNotNull(poolCapability.getStorageProtocol());
+        assertNotNull(poolCapability.getTimestamp());
+        assertNotNull(poolCapability.getDriverVersion());
+        assertNotNull(poolCapability.getTotalCapacityGB());
+        assertNotNull(poolCapability.getVendorName());
+        assertNotNull(poolCapability.getVolumeBackendName());
     }
 
+    public void testGetListWithoutDetail(){
+        FluentIterable<? extends BackendStoragePool> pools = backendStoragePoolsApi.list(false);
+        assertFalse(pools.isEmpty());
+        BackendStoragePool pool = pools.get(0);
+        assertNotNull(pool.getName());
+        assertNull(pool.getPoolCapability());
+    }
 }

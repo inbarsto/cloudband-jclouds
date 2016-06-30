@@ -17,6 +17,7 @@
 package org.jclouds.openstack.cinder.v2.features;
 
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.Lists;
 import org.jclouds.http.HttpResponse;
 import org.jclouds.openstack.cinder.v2.domain.BackendStoragePool;
 import org.jclouds.openstack.cinder.v2.domain.PoolCapability;
@@ -48,10 +49,25 @@ public class BackendStoragePoolApiExpectTest extends BaseCinderApiExpectTest {
         assertEquals(api.list(true), getTestBlockStoragePool());
     }
 
+    public void testGetListWithoutDetails(){
+        URI endpoint = URI
+                .create("http://172.16.0.1:8776/v1/50cdb4c60374463198695d9f798fa34d/scheduler-stats/get_pools?detail=false");
+        BackendStoragePoolsApi api = requestsSendResponses(
+                keystoneAuthWithUsernameAndPasswordAndTenantName,
+                responseWithKeystoneAccess,
+                authenticatedGET().endpoint(endpoint).build(),
+                HttpResponse
+                        .builder()
+                        .statusCode(200)
+                        .payload(
+                                payloadFromResource("/v2/BackendStoragePool_withoutDetail.json"))
+                        .build()).getBackendStoragePoolsApi("RegionOne");
+
+        assertEquals(api.list(false), createBackendPoolWithoutDetails());
+    }
+
     private FluentIterable<? extends BackendStoragePool> getTestBlockStoragePool() {
-        ArrayList<BackendStoragePool> backendStoragePoolList = new ArrayList<BackendStoragePool>();
-        backendStoragePoolList.add(createBackendStoragePool());
-        backendStoragePoolList.add(createBackendStoragePool2());
+        ArrayList<BackendStoragePool> backendStoragePoolList = Lists.newArrayList(createBackendStoragePool(), createBackendStoragePool2());
         return FluentIterable.from(backendStoragePoolList);
     }
 
@@ -78,5 +94,13 @@ public class BackendStoragePoolApiExpectTest extends BaseCinderApiExpectTest {
                 poolCapability);
     }
 
-
+    private FluentIterable<BackendStoragePool> createBackendPoolWithoutDetails(){
+        ArrayList<BackendStoragePool> backendStoragePoolList = Lists.newArrayList(
+               new BackendStoragePool("os-glance-01@adv_zone0#adv_zone0",null),
+               new BackendStoragePool("os-glance-00@default-rbd#default-rbd",null),
+               new BackendStoragePool("os-glance-01@default-rbd#default-rbd",null),
+               new BackendStoragePool("os-glance-00@adv_zone0#adv_zone0",null)
+        );
+        return FluentIterable.from(backendStoragePoolList);
+    }
 }

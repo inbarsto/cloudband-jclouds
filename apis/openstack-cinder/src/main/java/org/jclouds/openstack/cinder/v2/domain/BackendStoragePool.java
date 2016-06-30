@@ -17,13 +17,13 @@
 package org.jclouds.openstack.cinder.v2.domain;
 
 import com.google.common.base.Objects;
+import org.jclouds.javax.annotation.Nullable;
 
 import javax.inject.Named;
 import java.beans.ConstructorProperties;
 
 public class BackendStoragePool {
 
-    @Named("name")
     private final String name;
     @Named("capabilities")
     private final PoolCapability PoolCapability;
@@ -31,7 +31,7 @@ public class BackendStoragePool {
     @ConstructorProperties({
             "name", "capabilities"
     })
-    public BackendStoragePool(String name, PoolCapability poolCapability) {
+    public BackendStoragePool(String name,@Nullable PoolCapability poolCapability) {
         this.name = name;
         this.PoolCapability = poolCapability;
     }

@@ -53,5 +53,5 @@ public interface LimitsApi {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/limits")
     @Fallback(Fallbacks.NullOnNotFoundOr404.class)
-    public Limits getLimits();
+    Limits getLimits();
 }

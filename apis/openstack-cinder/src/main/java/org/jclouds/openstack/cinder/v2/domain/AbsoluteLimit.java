@@ -23,127 +23,8 @@ import java.beans.ConstructorProperties;
 
 public class AbsoluteLimit {
 
-    @Named("totalSnapshotsUsed")
-    private final int totalSnapshotsUsed;
-    @Named("maxTotalBackups")
-    private final int maxTotalBackups;
-    @Named("maxTotalVolumeGigabytes")
-    private final int maxTotalVolumeGigabytes;
-    @Named("maxTotalSnapshots")
-    private final int maxTotalSnapshots;
-    @Named("maxTotalBackupGigabytes")
-    private final int maxTotalBackupGigabytes;
-    @Named("totalBackupGigabytesUsed")
-    private final int totalBackupGigabytesUsed;
-    @Named("maxTotalVolumes")
-    private final int maxTotalVolumes;
-    @Named("totalVolumesUsed")
-    private final int totalVolumesUsed;
-    @Named("totalBackupsUsed")
-    private final int totalBackupsUsed;
-    @Named("totalGigabytesUsed")
-    private final int totalGigabytesUsed;
-
-    @ConstructorProperties({
-            "totalSnapshotsUsed", "maxTotalBackups", "maxTotalVolumeGigabytes", "maxTotalSnapshots", "maxTotalBackupGigabytes",
-            "totalBackupGigabytesUsed", "maxTotalVolumes", "totalVolumesUsed", "totalBackupsUsed", "totalGigabytesUsed"
-    })
-    public AbsoluteLimit(int totalSnapshotsUsed, int maxTotalBackups, int maxTotalVolumeGigabytes, int maxTotalSnapshots, int maxTotalBackupGigabytes, int totalBackupGigabytesUsed, int maxTotalVolumes, int totalVolumesUsed, int totalBackupsUsed, int totalGigabytesUsed) {
-        this.totalSnapshotsUsed = totalSnapshotsUsed;
-        this.maxTotalBackups = maxTotalBackups;
-        this.maxTotalVolumeGigabytes = maxTotalVolumeGigabytes;
-        this.maxTotalSnapshots = maxTotalSnapshots;
-        this.maxTotalBackupGigabytes = maxTotalBackupGigabytes;
-        this.totalBackupGigabytesUsed = totalBackupGigabytesUsed;
-        this.maxTotalVolumes = maxTotalVolumes;
-        this.totalVolumesUsed = totalVolumesUsed;
-        this.totalBackupsUsed = totalBackupsUsed;
-        this.totalGigabytesUsed = totalGigabytesUsed;
-    }
-
     public static Builder<?> builder() {
         return new ConcreteBuilder();
-    }
-
-    public int getTotalSnapshotsUsed() {
-        return totalSnapshotsUsed;
-    }
-
-    public int getMaxTotalBackups() {
-        return maxTotalBackups;
-    }
-
-    public int getMaxTotalVolumeGigabytes() {
-        return maxTotalVolumeGigabytes;
-    }
-
-    public int getMaxTotalSnapshots() {
-        return maxTotalSnapshots;
-    }
-
-    public int getMaxTotalBackupGigabytes() {
-        return maxTotalBackupGigabytes;
-    }
-
-    public int getTotalBackupGigabytesUsed() {
-        return totalBackupGigabytesUsed;
-    }
-
-    public int getMaxTotalVolumes() {
-        return maxTotalVolumes;
-    }
-
-    public int getTotalVolumesUsed() {
-        return totalVolumesUsed;
-    }
-
-    public int getTotalBackupsUsed() {
-        return totalBackupsUsed;
-    }
-
-    public int getTotalGigabytesUsed() {
-        return totalGigabytesUsed;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(totalSnapshotsUsed, maxTotalBackups, maxTotalVolumeGigabytes, maxTotalSnapshots, maxTotalBackupGigabytes,
-                totalBackupGigabytesUsed, maxTotalVolumes, totalVolumesUsed, totalBackupsUsed, totalGigabytesUsed);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        AbsoluteLimit that = AbsoluteLimit.class.cast(obj);
-        return Objects.equal(this.totalSnapshotsUsed, that.totalSnapshotsUsed)
-                && Objects.equal(this.maxTotalBackups, that.maxTotalBackups)
-                && Objects.equal(this.maxTotalVolumeGigabytes, that.maxTotalVolumeGigabytes)
-                && Objects.equal(this.maxTotalSnapshots, that.maxTotalSnapshots)
-                && Objects.equal(this.maxTotalBackupGigabytes, that.maxTotalBackupGigabytes)
-                && Objects.equal(this.totalBackupGigabytesUsed, that.totalBackupGigabytesUsed)
-                && Objects.equal(this.maxTotalVolumes, that.maxTotalVolumes)
-                && Objects.equal(this.totalVolumesUsed, that.totalVolumesUsed)
-                && Objects.equal(this.totalBackupsUsed, that.totalBackupsUsed)
-                && Objects.equal(this.totalGigabytesUsed, that.totalGigabytesUsed);
-    }
-
-    @Override
-    public String toString() {
-        return Objects.toStringHelper(this).add("totalSnapshotsUsed", totalSnapshotsUsed)
-                .add("maxTotalBackups", maxTotalBackups)
-                .add("maxTotalVolumeGigabytes", maxTotalVolumeGigabytes)
-                .add("maxTotalSnapshots", maxTotalSnapshots)
-                .add("maxTotalBackupGigabytes", maxTotalBackupGigabytes)
-                .add("totalBackupGigabytesUsed", totalBackupGigabytesUsed)
-                .add("maxTotalVolumes", maxTotalVolumes)
-                .add("totalVolumesUsed", totalVolumesUsed)
-                .add("totalBackupsUsed", totalBackupsUsed)
-                .add("totalGigabytesUsed", totalGigabytesUsed).toString();
-    }
-
-    public Builder<?> toBuilder() {
-        return new ConcreteBuilder().fromAbsoluteLimit(this);
     }
 
     private static class ConcreteBuilder extends Builder<ConcreteBuilder> {
@@ -236,4 +117,115 @@ public class AbsoluteLimit {
                     totalBackupGigabytesUsed, maxTotalVolumes, totalVolumesUsed, totalBackupsUsed, totalGigabytesUsed);
         }
     }
+
+    private final int totalSnapshotsUsed;
+    private final int maxTotalBackups;
+    private final int maxTotalVolumeGigabytes;
+    private final int maxTotalSnapshots;
+    private final int maxTotalBackupGigabytes;
+    private final int totalBackupGigabytesUsed;
+    private final int maxTotalVolumes;
+    private final int totalVolumesUsed;
+    private final int totalBackupsUsed;
+    private final int totalGigabytesUsed;
+
+    @ConstructorProperties({
+            "totalSnapshotsUsed", "maxTotalBackups", "maxTotalVolumeGigabytes", "maxTotalSnapshots", "maxTotalBackupGigabytes",
+            "totalBackupGigabytesUsed", "maxTotalVolumes", "totalVolumesUsed", "totalBackupsUsed", "totalGigabytesUsed"
+    })
+    public AbsoluteLimit(int totalSnapshotsUsed, int maxTotalBackups, int maxTotalVolumeGigabytes, int maxTotalSnapshots, int maxTotalBackupGigabytes, int totalBackupGigabytesUsed, int maxTotalVolumes, int totalVolumesUsed, int totalBackupsUsed, int totalGigabytesUsed) {
+        this.totalSnapshotsUsed = totalSnapshotsUsed;
+        this.maxTotalBackups = maxTotalBackups;
+        this.maxTotalVolumeGigabytes = maxTotalVolumeGigabytes;
+        this.maxTotalSnapshots = maxTotalSnapshots;
+        this.maxTotalBackupGigabytes = maxTotalBackupGigabytes;
+        this.totalBackupGigabytesUsed = totalBackupGigabytesUsed;
+        this.maxTotalVolumes = maxTotalVolumes;
+        this.totalVolumesUsed = totalVolumesUsed;
+        this.totalBackupsUsed = totalBackupsUsed;
+        this.totalGigabytesUsed = totalGigabytesUsed;
+    }
+
+
+    public int getTotalSnapshotsUsed() {
+        return totalSnapshotsUsed;
+    }
+
+    public int getMaxTotalBackups() {
+        return maxTotalBackups;
+    }
+
+    public int getMaxTotalVolumeGigabytes() {
+        return maxTotalVolumeGigabytes;
+    }
+
+    public int getMaxTotalSnapshots() {
+        return maxTotalSnapshots;
+    }
+
+    public int getMaxTotalBackupGigabytes() {
+        return maxTotalBackupGigabytes;
+    }
+
+    public int getTotalBackupGigabytesUsed() {
+        return totalBackupGigabytesUsed;
+    }
+
+    public int getMaxTotalVolumes() {
+        return maxTotalVolumes;
+    }
+
+    public int getTotalVolumesUsed() {
+        return totalVolumesUsed;
+    }
+
+    public int getTotalBackupsUsed() {
+        return totalBackupsUsed;
+    }
+
+    public int getTotalGigabytesUsed() {
+        return totalGigabytesUsed;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(totalSnapshotsUsed, maxTotalBackups, maxTotalVolumeGigabytes, maxTotalSnapshots, maxTotalBackupGigabytes,
+                totalBackupGigabytesUsed, maxTotalVolumes, totalVolumesUsed, totalBackupsUsed, totalGigabytesUsed);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        AbsoluteLimit that = AbsoluteLimit.class.cast(obj);
+        return Objects.equal(this.totalSnapshotsUsed, that.totalSnapshotsUsed)
+                && Objects.equal(this.maxTotalBackups, that.maxTotalBackups)
+                && Objects.equal(this.maxTotalVolumeGigabytes, that.maxTotalVolumeGigabytes)
+                && Objects.equal(this.maxTotalSnapshots, that.maxTotalSnapshots)
+                && Objects.equal(this.maxTotalBackupGigabytes, that.maxTotalBackupGigabytes)
+                && Objects.equal(this.totalBackupGigabytesUsed, that.totalBackupGigabytesUsed)
+                && Objects.equal(this.maxTotalVolumes, that.maxTotalVolumes)
+                && Objects.equal(this.totalVolumesUsed, that.totalVolumesUsed)
+                && Objects.equal(this.totalBackupsUsed, that.totalBackupsUsed)
+                && Objects.equal(this.totalGigabytesUsed, that.totalGigabytesUsed);
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).add("totalSnapshotsUsed", totalSnapshotsUsed)
+                .add("maxTotalBackups", maxTotalBackups)
+                .add("maxTotalVolumeGigabytes", maxTotalVolumeGigabytes)
+                .add("maxTotalSnapshots", maxTotalSnapshots)
+                .add("maxTotalBackupGigabytes", maxTotalBackupGigabytes)
+                .add("totalBackupGigabytesUsed", totalBackupGigabytesUsed)
+                .add("maxTotalVolumes", maxTotalVolumes)
+                .add("totalVolumesUsed", totalVolumesUsed)
+                .add("totalBackupsUsed", totalBackupsUsed)
+                .add("totalGigabytesUsed", totalGigabytesUsed).toString();
+    }
+
+    public Builder<?> toBuilder() {
+        return new ConcreteBuilder().fromAbsoluteLimit(this);
+    }
+
 }

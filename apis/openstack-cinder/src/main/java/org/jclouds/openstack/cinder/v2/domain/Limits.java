@@ -24,44 +24,8 @@ import java.beans.ConstructorProperties;
 
 public class Limits {
 
-    @Named("absolute")
-    private final AbsoluteLimit absoluteLimit;
-
-    @ConstructorProperties({
-            "absolute"
-    })
-    public Limits(AbsoluteLimit absoluteLimit) {
-        this.absoluteLimit = absoluteLimit;
-    }
-
     public static Builder<?> builder() {
         return new ConcreteBuilder();
-    }
-
-    public AbsoluteLimit getAbsoluteLimit() {
-        return absoluteLimit;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(absoluteLimit);
-    }
-
-    @Override
-    public String toString() {
-        return Objects.toStringHelper(this).add("absoluteLimit", absoluteLimit).toString();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Limits that = Limits.class.cast(obj);
-        return Objects.equal(this.absoluteLimit, that.absoluteLimit);
-    }
-
-    public Builder<?> toBuilder() {
-        return new ConcreteBuilder().fromLimits(this);
     }
 
     private static class ConcreteBuilder extends Builder<ConcreteBuilder> {
@@ -90,4 +54,43 @@ public class Limits {
             return new Limits(absoluteLimit);
         }
     }
+
+
+    @Named("absolute")
+    private final AbsoluteLimit absoluteLimit;
+
+    @ConstructorProperties({
+            "absolute"
+    })
+    public Limits(AbsoluteLimit absoluteLimit) {
+        this.absoluteLimit = absoluteLimit;
+    }
+
+
+    public AbsoluteLimit getAbsoluteLimit() {
+        return absoluteLimit;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(absoluteLimit);
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).add("absoluteLimit", absoluteLimit).toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Limits that = Limits.class.cast(obj);
+        return Objects.equal(this.absoluteLimit, that.absoluteLimit);
+    }
+
+    public Builder<?> toBuilder() {
+        return new ConcreteBuilder().fromLimits(this);
+    }
+
 }

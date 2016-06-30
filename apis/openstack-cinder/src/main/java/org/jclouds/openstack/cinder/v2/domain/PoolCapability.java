@@ -26,250 +26,248 @@ import com.google.common.base.Objects;
 
 public class PoolCapability {
 
-	public static Builder<?> builder() {
-		return new ConcreteBuilder();
-	}
+    public static Builder<?> builder() {
+        return new ConcreteBuilder();
+    }
 
-	private static class ConcreteBuilder extends Builder<ConcreteBuilder> {
-		@Override
-		protected ConcreteBuilder self() {
-			return this;
-		}
-	}
+    private static class ConcreteBuilder extends Builder<ConcreteBuilder> {
+        @Override
+        protected ConcreteBuilder self() {
+            return this;
+        }
+    }
 
-	public abstract static class Builder<T extends Builder<T>> {
-		protected abstract T self();
+    public abstract static class Builder<T extends Builder<T>> {
+        protected abstract T self();
 
-		protected String filterFunction;
-		protected String goodnessFunction;
-		protected String timestamp;
-		protected String volumeBackendName;
-		protected long freeCapacityGB;
-		protected String driverVersion;
-		protected long totalCapacityGB;
-		protected int reservedPercentage;
-		protected String vendorName;
-		protected String storageProtocol;
-		
-		
-		public T filterFunction(String filterFunction){
-			this.filterFunction= filterFunction;
-			return self();
-		}
-		
-		public T goodnessFunction(String goodnessFunction){
-			this.goodnessFunction= goodnessFunction;
-			return self();
-		}
-		
-		public T timestamp(String timestamp){
-			this.timestamp= timestamp;
-			return self();
-		}
-		
-		public T volumeBackendName(String volumeBackendName){
-			this.volumeBackendName= volumeBackendName;
-			return self();
-		}
-		
-		public T freeCapacityGB(long freeCapacityGB){
-			this.freeCapacityGB= freeCapacityGB;
-			return self();
-		}
-		
-		public T driverVersion(String driverVersion){
-			this.driverVersion= driverVersion;
-			return self();
-		}
-		
-		public T totalCapacityGB(long totalCapacityGB){
-			this.totalCapacityGB= totalCapacityGB;
-			return self();
-		}
-		
-		public T reservedPercentage(int reservedPercentage){
-			this.reservedPercentage= reservedPercentage;
-			return self();
-		}
+        protected String filterFunction;
+        protected String goodnessFunction;
+        protected String timestamp;
+        protected String volumeBackendName;
+        protected long freeCapacityGB;
+        protected String driverVersion;
+        protected long totalCapacityGB;
+        protected int reservedPercentage;
+        protected String vendorName;
+        protected String storageProtocol;
 
-		public T vendorName(String vendorName){
-			this.vendorName= vendorName;
-			return self();
-		}
-		
-		public T storageProtocol(String storageProtocol){
-			this.storageProtocol= storageProtocol;
-			return self();
-		}
-		
-		public T fromPoolCapability(PoolCapability in){
-			return self().filterFunction(in.filterFunction)
-					.goodnessFunction(in.goodnessFunction)
-					.timestamp(in.timestamp)
-					.volumeBackendName(in.volumeBackendName)
-					.freeCapacityGB(in.freeCapacityGB)
-					.driverVersion(in.driverVersion)
-					.totalCapacityGB(in.totalCapacityGB)
-					.reservedPercentage(in.reservedPercentage)
-					.vendorName(in.vendorName)
-					.storageProtocol(in.storageProtocol);
-		}
-		
-		public PoolCapability build(){
-			return new PoolCapability(filterFunction, goodnessFunction, timestamp, volumeBackendName, freeCapacityGB, driverVersion, totalCapacityGB, reservedPercentage, vendorName, storageProtocol);
-		}
-	}
 
-	
-	
-	@Named("filter_function")
-	private final String filterFunction ;
-	@Named("goodness_function")
-	private final String goodnessFunction;
-	@Named("timestamp")
-	private final String timestamp;
-	@Named("volume_backend_name")
-	private final String volumeBackendName;
-	@Named("free_capacity_gb")
-	private final long freeCapacityGB;
-	@Named("driver_version")
-	private final String driverVersion ;
-	@Named("total_capacity_gb")
-	private final long totalCapacityGB;
-	@Named("reserved_percentage")
-	private final int reservedPercentage;
-	@Named("vendor_name")
-	private final String vendorName;
-	@Named("storage_protocol")
-	private final String storageProtocol;
-	
-	@ConstructorProperties({
-		"filter_function","goodness_function","timestamp","volume_backend_name","free_capacity_gb","driver_version","total_capacity_gb","reserved_percentage","vendor_name","storage_protocol"
-		})
-	protected PoolCapability(@Nullable String filterFunction,@Nullable String goodnessFunction,String timestamp,String volumeBackendName,long freeCapacityGB,String driverVersion,long totalCapacityGB,int reservedPercentage,String vendorName,String storageProtocol){
-		this.filterFunction=filterFunction;
-		this.goodnessFunction=goodnessFunction;
-		this.timestamp=timestamp;
-		this.volumeBackendName=volumeBackendName;
-		this.freeCapacityGB=freeCapacityGB;
-		this.driverVersion=driverVersion;
-		this.totalCapacityGB=totalCapacityGB;
-		this.reservedPercentage=reservedPercentage;
-		this.vendorName=vendorName;
-		this.storageProtocol=storageProtocol;
-	}
-	
-	/**
-	 * @return the filterFunction
-	 */
-	public String getFilterFunction() {
-		return filterFunction;
-	}
+        public T filterFunction(String filterFunction) {
+            this.filterFunction = filterFunction;
+            return self();
+        }
 
-	/**
-	 * @return the goodnessFunction
-	 */
-	public String getGoodnessFunction() {
-		return goodnessFunction;
-	}
+        public T goodnessFunction(String goodnessFunction) {
+            this.goodnessFunction = goodnessFunction;
+            return self();
+        }
 
-	/**
-	 * @return the timestamp
-	 */
-	public String getTimestamp() {
-		return timestamp;
-	}
+        public T timestamp(String timestamp) {
+            this.timestamp = timestamp;
+            return self();
+        }
 
-	/**
-	 * @return the volumeBackendName
-	 */
-	public String getVolumeBackendName() {
-		return volumeBackendName;
-	}
+        public T volumeBackendName(String volumeBackendName) {
+            this.volumeBackendName = volumeBackendName;
+            return self();
+        }
 
-	/**
-	 * @return the freeCapacityGB
-	 */
-	public long getFreeCapacityGB() {
-		return freeCapacityGB;
-	}
+        public T freeCapacityGB(long freeCapacityGB) {
+            this.freeCapacityGB = freeCapacityGB;
+            return self();
+        }
 
-	/**
-	 * @return the driverVersion
-	 */
-	public String getDriverVersion() {
-		return driverVersion;
-	}
+        public T driverVersion(String driverVersion) {
+            this.driverVersion = driverVersion;
+            return self();
+        }
 
-	/**
-	 * @return the totalCapacityGB
-	 */
-	public long getTotalCapacityGB() {
-		return totalCapacityGB;
-	}
+        public T totalCapacityGB(long totalCapacityGB) {
+            this.totalCapacityGB = totalCapacityGB;
+            return self();
+        }
 
-	/**
-	 * @return the reservedPercentage
-	 */
-	public int getReservedpercentage() {
-		return reservedPercentage;
-	}
+        public T reservedPercentage(int reservedPercentage) {
+            this.reservedPercentage = reservedPercentage;
+            return self();
+        }
 
-	/**
-	 * @return the vendorName
-	 */
-	public String getVendorName() {
-		return vendorName;
-	}
+        public T vendorName(String vendorName) {
+            this.vendorName = vendorName;
+            return self();
+        }
 
-	/**
-	 * @return the storageProtocol
-	 */
-	public String getStorageProtocol() {
-		return storageProtocol;
-	}
-	
-	
-	@Override
-	public int hashCode() {
-		 return Objects.hashCode(filterFunction, goodnessFunction, timestamp, volumeBackendName, freeCapacityGB, driverVersion, totalCapacityGB, reservedPercentage, vendorName, storageProtocol);
-	}
+        public T storageProtocol(String storageProtocol) {
+            this.storageProtocol = storageProtocol;
+            return self();
+        }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) return true;
-		if (obj == null || getClass() != obj.getClass()) return false;
-		PoolCapability that = PoolCapability.class.cast(obj);
-		return Objects.equal(this.filterFunction,that.filterFunction) 
-				&& Objects.equal(this.goodnessFunction,that.goodnessFunction)
-				&& Objects.equal(this.timestamp,that.timestamp)
-				&& Objects.equal(this.volumeBackendName,that.volumeBackendName)
-				&& Objects.equal(this.freeCapacityGB,that.freeCapacityGB)
-				&& Objects.equal(this.driverVersion,that.driverVersion)
-				&& Objects.equal(this.totalCapacityGB,that.totalCapacityGB)
-				&& Objects.equal(this.reservedPercentage,that.reservedPercentage)
-				&& Objects.equal(this.vendorName,that.vendorName)
-				&& Objects.equal(this.storageProtocol,that.storageProtocol) ;
-		
-	}
-	
-	
-	@Override
-	public String toString() {
-		return Objects.toStringHelper(this).add("filterFunction", filterFunction)
-				.add("goodnessFunction", goodnessFunction)
-				.add("timestamp", timestamp)
-				.add("volumeBackendName", volumeBackendName)
-				.add("freeCapacityGB", freeCapacityGB)
-				.add("driverVersion", driverVersion)
-				.add("totalCapacityGB", totalCapacityGB)
-				.add("goodnessFunction", goodnessFunction)
-				.add("reservedPercentage", reservedPercentage)
-				.add("vendorName", vendorName)
-				.add("storageProtocol", storageProtocol).toString();
-	}
+        public T fromPoolCapability(PoolCapability in) {
+            return self().filterFunction(in.filterFunction)
+                    .goodnessFunction(in.goodnessFunction)
+                    .timestamp(in.timestamp)
+                    .volumeBackendName(in.volumeBackendName)
+                    .freeCapacityGB(in.freeCapacityGB)
+                    .driverVersion(in.driverVersion)
+                    .totalCapacityGB(in.totalCapacityGB)
+                    .reservedPercentage(in.reservedPercentage)
+                    .vendorName(in.vendorName)
+                    .storageProtocol(in.storageProtocol);
+        }
 
-	public Builder<?> toBuilder() {
-		return new ConcreteBuilder().fromPoolCapability(this);
-	}
+        public PoolCapability build() {
+            return new PoolCapability(filterFunction, goodnessFunction, timestamp, volumeBackendName, freeCapacityGB, driverVersion, totalCapacityGB, reservedPercentage, vendorName, storageProtocol);
+        }
+    }
+
+
+    @Named("filter_function")
+    private final String filterFunction;
+    @Named("goodness_function")
+    private final String goodnessFunction;
+    @Named("timestamp")
+    private final String timestamp;
+    @Named("volume_backend_name")
+    private final String volumeBackendName;
+    @Named("free_capacity_gb")
+    private final long freeCapacityGB;
+    @Named("driver_version")
+    private final String driverVersion;
+    @Named("total_capacity_gb")
+    private final long totalCapacityGB;
+    @Named("reserved_percentage")
+    private final int reservedPercentage;
+    @Named("vendor_name")
+    private final String vendorName;
+    @Named("storage_protocol")
+    private final String storageProtocol;
+
+    @ConstructorProperties({
+            "filter_function", "goodness_function", "timestamp", "volume_backend_name", "free_capacity_gb", "driver_version", "total_capacity_gb", "reserved_percentage", "vendor_name", "storage_protocol"
+    })
+    protected PoolCapability(@Nullable String filterFunction, @Nullable String goodnessFunction, String timestamp, String volumeBackendName, long freeCapacityGB, String driverVersion, long totalCapacityGB, int reservedPercentage, String vendorName, String storageProtocol) {
+        this.filterFunction = filterFunction;
+        this.goodnessFunction = goodnessFunction;
+        this.timestamp = timestamp;
+        this.volumeBackendName = volumeBackendName;
+        this.freeCapacityGB = freeCapacityGB;
+        this.driverVersion = driverVersion;
+        this.totalCapacityGB = totalCapacityGB;
+        this.reservedPercentage = reservedPercentage;
+        this.vendorName = vendorName;
+        this.storageProtocol = storageProtocol;
+    }
+
+    /**
+     * @return the filterFunction
+     */
+    public String getFilterFunction() {
+        return filterFunction;
+    }
+
+    /**
+     * @return the goodnessFunction
+     */
+    public String getGoodnessFunction() {
+        return goodnessFunction;
+    }
+
+    /**
+     * @return the timestamp
+     */
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    /**
+     * @return the volumeBackendName
+     */
+    public String getVolumeBackendName() {
+        return volumeBackendName;
+    }
+
+    /**
+     * @return the freeCapacityGB
+     */
+    public long getFreeCapacityGB() {
+        return freeCapacityGB;
+    }
+
+    /**
+     * @return the driverVersion
+     */
+    public String getDriverVersion() {
+        return driverVersion;
+    }
+
+    /**
+     * @return the totalCapacityGB
+     */
+    public long getTotalCapacityGB() {
+        return totalCapacityGB;
+    }
+
+    /**
+     * @return the reservedPercentage
+     */
+    public int getReservedpercentage() {
+        return reservedPercentage;
+    }
+
+    /**
+     * @return the vendorName
+     */
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    /**
+     * @return the storageProtocol
+     */
+    public String getStorageProtocol() {
+        return storageProtocol;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(filterFunction, goodnessFunction, timestamp, volumeBackendName, freeCapacityGB, driverVersion, totalCapacityGB, reservedPercentage, vendorName, storageProtocol);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        PoolCapability that = PoolCapability.class.cast(obj);
+        return Objects.equal(this.filterFunction, that.filterFunction)
+                && Objects.equal(this.goodnessFunction, that.goodnessFunction)
+                && Objects.equal(this.timestamp, that.timestamp)
+                && Objects.equal(this.volumeBackendName, that.volumeBackendName)
+                && Objects.equal(this.freeCapacityGB, that.freeCapacityGB)
+                && Objects.equal(this.driverVersion, that.driverVersion)
+                && Objects.equal(this.totalCapacityGB, that.totalCapacityGB)
+                && Objects.equal(this.reservedPercentage, that.reservedPercentage)
+                && Objects.equal(this.vendorName, that.vendorName)
+                && Objects.equal(this.storageProtocol, that.storageProtocol);
+
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).add("filterFunction", filterFunction)
+                .add("goodnessFunction", goodnessFunction)
+                .add("timestamp", timestamp)
+                .add("volumeBackendName", volumeBackendName)
+                .add("freeCapacityGB", freeCapacityGB)
+                .add("driverVersion", driverVersion)
+                .add("totalCapacityGB", totalCapacityGB)
+                .add("goodnessFunction", goodnessFunction)
+                .add("reservedPercentage", reservedPercentage)
+                .add("vendorName", vendorName)
+                .add("storageProtocol", storageProtocol).toString();
+    }
+
+    public Builder<?> toBuilder() {
+        return new ConcreteBuilder().fromPoolCapability(this);
+    }
 }

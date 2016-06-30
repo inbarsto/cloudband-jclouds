@@ -17,20 +17,22 @@
 package org.jclouds.openstack.cinder.v2.features;
 
 import com.google.common.collect.Iterables;
+import org.jclouds.openstack.cinder.v1.internal.BaseCinderApiLiveTest;
+import org.jclouds.openstack.cinder.v2.CinderApi;
 import org.jclouds.openstack.cinder.v2.domain.Limits;
-import org.jclouds.openstack.cinder.v2.internal.BaseCinderApiLiveTest;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertTrue;
+
 @Test(groups = "live", testName = "LimitsApiLiveTest", singleThreaded = true)
-public class LimitsApiLiveTest extends BaseCinderApiLiveTest {
+public class LimitsApiLiveTest extends BaseCinderApiLiveTest<CinderApi> {
 
     private LimitsApi limitsApi;
 
     public LimitsApiLiveTest() {
-        super();
-        provider = "openstack-cinder-v2";
+        super("openstack-cinder-v2");
     }
 
     @BeforeClass(groups = {"integration", "live"})
@@ -44,7 +46,10 @@ public class LimitsApiLiveTest extends BaseCinderApiLiveTest {
         Limits limits = limitsApi.getLimits();
         Assert.assertNotNull(limits);
         Assert.assertNotNull(limits.getAbsoluteLimit());
-        Assert.assertTrue(limits.getAbsoluteLimit().getMaxTotalVolumeGigabytes() > 0);
-        Assert.assertTrue(limits.getAbsoluteLimit().getTotalBackupGigabytesUsed() > 0);
+        assertTrue(limits.getAbsoluteLimit().getMaxTotalVolumeGigabytes() > 0);
+        assertTrue(limits.getAbsoluteLimit().getTotalBackupGigabytesUsed() > 0);
+        assertTrue(limits.getAbsoluteLimit().getMaxTotalVolumes() > 0);
+        assertTrue(limits.getAbsoluteLimit().getTotalVolumesUsed() > 0);
+        assertTrue(limits.getAbsoluteLimit().getMaxTotalSnapshots() > 0);
     }
 }
