@@ -16,6 +16,8 @@
  */
 package org.jclouds.openstack.cinder.v1.features;
 
+import com.google.common.collect.Iterables;
+import org.jclouds.openstack.cinder.v1.CinderApi;
 import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.ExecutionException;
@@ -28,13 +30,12 @@ import org.testng.annotations.Test;
 import com.google.common.collect.Iterables;
 
 @Test(groups = "live", testName = "QuotasApiLiveTest", singleThreaded = true)
-public class QuotasApiLiveTest extends BaseCinderApiLiveTest {
+public class QuotasApiLiveTest extends BaseCinderApiLiveTest<CinderApi> {
 
    private QuotaApi quotaApi;
 
    public QuotasApiLiveTest() {
-      super();
-      provider = "openstack-cinder";
+      super("openstack-cinder");
    }
 
    @BeforeClass(groups = {"integration", "live"})

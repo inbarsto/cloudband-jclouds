@@ -32,7 +32,7 @@ public class QuotasApiExpectTest extends BaseCinderApiExpectTest {
       URI endpoint = URI.create("http://172.16.0.1:8776/v1/50cdb4c60374463198695d9f798fa34d/os-quota-sets/demo");
       QuotaApi api = requestsSendResponses(
             keystoneAuthWithUsernameAndPasswordAndTenantName,
-            responseWithKeystoneAccess,
+              responseWithKeystoneAccess,
             authenticatedGET().endpoint(endpoint).build(),
             HttpResponse.builder().statusCode(200).payload(payloadFromResource("/quotas.json")).build()
       ).getQuotaApi("RegionOne");
