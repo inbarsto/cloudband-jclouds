@@ -19,7 +19,6 @@ package org.jclouds.openstack.cinder.v1.extentions;
 
 import com.google.common.annotations.Beta;
 import com.google.common.collect.FluentIterable;
-import com.google.common.util.concurrent.ListenableFuture;
 import org.jclouds.Fallbacks;
 import org.jclouds.openstack.cinder.v1.domain.zonescoped.AvailabilityZone;
 import org.jclouds.openstack.keystone.v2_0.filters.AuthenticateRequest;

@@ -20,6 +20,7 @@ import static org.testng.Assert.assertNotNull;
 
 import java.util.Set;
 
+import org.jclouds.openstack.cinder.v1.CinderApi;
 import org.jclouds.openstack.cinder.v1.domain.VolumeType;
 import org.jclouds.openstack.cinder.v1.internal.BaseCinderApiLiveTest;
 import org.testng.annotations.AfterClass;
@@ -32,9 +33,13 @@ import com.google.common.collect.Iterables;
  * Tests behavior of VolumeTypeApi.
  */
 @Test(groups = "live", testName = "VolumeTypeApiLiveTest", singleThreaded = true)
-public class VolumeTypeApiLiveTest extends BaseCinderApiLiveTest {
+public class VolumeTypeApiLiveTest extends BaseCinderApiLiveTest<CinderApi> {
    private VolumeTypeApi volumeTypeApi;
    private String zone;
+
+    public VolumeTypeApiLiveTest() {
+        super("openstack-cinder");
+    }
 
    @BeforeGroups(groups = {"integration", "live"})
    @Override

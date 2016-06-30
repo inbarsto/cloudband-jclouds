@@ -22,4 +22,8 @@ import org.jclouds.openstack.cinder.v1.CinderApi;
  * Base class for writing Volume Rest Api Expect tests
  */
 public class BaseCinderApiExpectTest extends BaseCinderExpectTest<CinderApi> {
+
+    public BaseCinderApiExpectTest() {
+        super("openstack-cinder");
+    }
 }

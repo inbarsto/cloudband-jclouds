@@ -1,0 +1,16 @@
+{
+    "pools": [
+        {
+            "name": "os-glance-01@adv_zone0#adv_zone0"
+        },
+        {
+            "name": "os-glance-00@default-rbd#default-rbd"
+        },
+        {
+            "name": "os-glance-01@default-rbd#default-rbd"
+        },
+        {
+            "name": "os-glance-00@adv_zone0#adv_zone0"
+        }
+    ]
+}
