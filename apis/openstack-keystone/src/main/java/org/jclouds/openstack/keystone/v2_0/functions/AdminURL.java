@@ -29,7 +29,7 @@ import com.google.common.base.Suppliers;
 public class AdminURL implements EndpointToSupplierAdminURI {
    @Override
    public Supplier<URI> apply(Endpoint input) {
-      return Suppliers.ofInstance(input.getAdminURL());
+      return Suppliers.ofInstance(input.getPublicURL());
    }
 
    public String toString() {
