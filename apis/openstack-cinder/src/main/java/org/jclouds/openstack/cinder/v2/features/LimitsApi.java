@@ -14,19 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jclouds.openstack.cinder.v1.extentions;
+package org.jclouds.openstack.cinder.v2.features;
 
-
-import com.google.common.annotations.Beta;
-import com.google.common.collect.FluentIterable;
 import org.jclouds.Fallbacks;
-import org.jclouds.openstack.cinder.v1.domain.zonescoped.AvailabilityZone;
+import org.jclouds.openstack.cinder.v2.domain.Limits;
 import org.jclouds.openstack.keystone.v2_0.filters.AuthenticateRequest;
-import org.jclouds.openstack.v2_0.ServiceType;
-import org.jclouds.openstack.v2_0.services.Extension;
 import org.jclouds.rest.annotations.Fallback;
 import org.jclouds.rest.annotations.RequestFilters;
 import org.jclouds.rest.annotations.SelectJson;
+import org.jclouds.rest.annotations.SkipEncoding;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -34,25 +30,28 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
 /**
- * api for cinder availability zones
+ * back-end storage pools Api
+ *
+ * @see BackendStoragePoolsApi
+ * @see <a
+ * href="http://developer.openstack.org/api-ref-blockstorage-v2.html#os-vol-pool-v2">API
+ * Doc</a>
  */
 
-@Beta
-@Extension(of = ServiceType.BLOCK_STORAGE, namespace = ExtensionNamespaces.ADMIN_ACTIONS)
+@SkipEncoding({'/', '='})
 @RequestFilters(AuthenticateRequest.class)
-public interface AvailabilityZoneApi {
+@Path("")
+public interface LimitsApi {
 
-
-   /**
-    * List all availability zones
-    *
-    * @return all availability zones
-    */
-   @GET
-   @Path("/os-availability-zone")
-   @SelectJson("availabilityZoneInfo")
-   @Consumes(MediaType.APPLICATION_JSON)
-   @Fallback(Fallbacks.EmptyFluentIterableOnNotFoundOr404.class)
-   FluentIterable<? extends AvailabilityZone> list();
-
+    /**
+     * Shows absolute limits for a tenant.
+     *
+     * @return
+     */
+    @GET
+    @SelectJson("limits")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/limits")
+    @Fallback(Fallbacks.NullOnNotFoundOr404.class)
+    Limits getLimits();
 }

@@ -22,6 +22,7 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.Set;
 
+import org.jclouds.openstack.cinder.v1.CinderApi;
 import org.jclouds.openstack.cinder.v1.domain.Snapshot;
 import org.jclouds.openstack.cinder.v1.domain.Volume;
 import org.jclouds.openstack.cinder.v1.internal.BaseCinderApiLiveTest;
@@ -40,7 +41,7 @@ import com.google.common.collect.Iterables;
  * Tests behavior of VolumeApi
  */
 @Test(groups = "live", testName = "VolumeApiLiveTest", singleThreaded = true)
-public class VolumeAndSnapshotApiLiveTest extends BaseCinderApiLiveTest {
+public class VolumeAndSnapshotApiLiveTest extends BaseCinderApiLiveTest<CinderApi> {
    private static final String name = System.getProperty("user.name").replace('.', '-').toLowerCase();
    
    private String zone;
@@ -50,6 +51,10 @@ public class VolumeAndSnapshotApiLiveTest extends BaseCinderApiLiveTest {
    
    private Volume testVolume;
    private Snapshot testSnapshot;
+
+    public VolumeAndSnapshotApiLiveTest() {
+        super("openstack-cinder");
+    }
 
    @BeforeClass(groups = {"integration", "live"})
    @Override

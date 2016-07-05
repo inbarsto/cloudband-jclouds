@@ -294,6 +294,7 @@ public class SnapshotApiExpectTest extends BaseCinderApiExpectTest {
             .name("jclouds-test-snapshot")
             .size(1)
             .created(dateService.iso8601DateParse("2012-11-02T16:23:27.000000"))
+            .projectId( "cc03fd4f503f4d9c986b381b8abe6af5" )
             .build();
    }
 }

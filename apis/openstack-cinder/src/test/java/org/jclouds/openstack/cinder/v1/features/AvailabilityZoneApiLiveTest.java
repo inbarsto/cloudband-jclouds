@@ -19,6 +19,7 @@ package org.jclouds.openstack.cinder.v1.features;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import org.jclouds.openstack.cinder.v1.CinderApi;
 import org.jclouds.openstack.cinder.v1.domain.zonescoped.AvailabilityZone;
 import org.jclouds.openstack.cinder.v1.extentions.AvailabilityZoneApi;
 import org.jclouds.openstack.cinder.v1.internal.BaseCinderApiLiveTest;
@@ -27,13 +28,12 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 
 @Test(groups = "live", testName = "AvailabilityZoneApiLiveTest", singleThreaded = true)
-public class AvailabilityZoneApiLiveTest extends BaseCinderApiLiveTest {
+public class AvailabilityZoneApiLiveTest extends BaseCinderApiLiveTest<CinderApi> {
 
    private AvailabilityZoneApi availabilityZoneApi;
 
    public AvailabilityZoneApiLiveTest() {
-      super();
-      provider = "openstack-cinder";
+      super("openstack-cinder");
    }
 
    @BeforeClass(groups = {"integration", "live"})

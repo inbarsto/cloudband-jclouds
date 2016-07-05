@@ -14,16 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jclouds.openstack.cinder.v1.internal;
+package org.jclouds.openstack.cinder.v2.config;
 
-import org.jclouds.openstack.cinder.v1.CinderApi;
+import com.google.inject.AbstractModule;
+import org.jclouds.json.config.GsonModule;
+import org.jclouds.json.config.GsonModule.DateAdapter;
 
-/**
- * Base class for writing Volume Rest Api Expect tests
- */
-public class BaseCinderApiExpectTest extends BaseCinderExpectTest<CinderApi> {
-
-    public BaseCinderApiExpectTest() {
-        super("openstack-cinder");
+public class CinderParserModule extends AbstractModule {
+    @Override
+    protected void configure() {
+        bind(DateAdapter.class).to(GsonModule.Iso8601DateAdapter.class);
     }
 }

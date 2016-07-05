@@ -14,9 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jclouds.openstack.cinder.v1.internal;
+package org.jclouds.openstack.cinder.v2.internal;
 
-import org.jclouds.openstack.cinder.v1.CinderApi;
+import org.jclouds.openstack.cinder.v1.internal.BaseCinderExpectTest;
+import org.jclouds.openstack.cinder.v2.CinderApi;
 
 /**
  * Base class for writing Volume Rest Api Expect tests
@@ -24,6 +25,6 @@ import org.jclouds.openstack.cinder.v1.CinderApi;
 public class BaseCinderApiExpectTest extends BaseCinderExpectTest<CinderApi> {
 
     public BaseCinderApiExpectTest() {
-        super("openstack-cinder");
+        super("openstack-cinder-v2");
     }
 }
