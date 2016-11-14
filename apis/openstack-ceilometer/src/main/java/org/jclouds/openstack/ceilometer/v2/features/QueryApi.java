@@ -57,6 +57,6 @@ public interface QueryApi {
    @Produces(MediaType.APPLICATION_JSON)
    @Fallback(EmptyListOnNotFoundOr404.class)
    @Payload("%7B\"filter\":\"{filter}\",\"limit\":\"{limit}\"%7D")
-   List<Sample> listSamples(/*@Nullable*/ @PayloadParam("filter") String filter, @Nullable @PayloadParam("limit") int limit);
+   List<Sample> listSamples(/*@Nullable*/ @PayloadParam("filter") String filter, /*@Nullable*/ @PayloadParam("limit") int limit);
 
 }
