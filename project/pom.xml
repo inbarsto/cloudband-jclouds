@@ -115,6 +115,16 @@
   </pluginRepositories>
 
   <distributionManagement>
+    <repository>
+        <id>releases</id>
+        <name>Nexus Release</name>
+        <url>http://nexus/nexus/content/repositories/releases</url>
+    </repository>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <name>Nexus Snapshot</name>
+        <url>http://nexus/nexus/content/repositories/thirdparty-snapshots</url>
+    </snapshotRepository>
     <site>
       <id>jclouds-github-pages-site</id>
       <url>${maven.site.url.base}/${project.version}</url>
