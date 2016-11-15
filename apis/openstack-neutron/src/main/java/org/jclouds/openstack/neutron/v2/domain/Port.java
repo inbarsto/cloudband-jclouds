@@ -262,7 +262,7 @@ public class Port {
    /**
     * @return the administrative state of port. If false, port does not forward packets.
     */
-   @Nullable
+//   @Nullable
    public boolean isAdminStateUp() {
       return adminStateUp;
    }
