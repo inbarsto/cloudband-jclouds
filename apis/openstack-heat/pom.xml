@@ -42,7 +42,7 @@
         <jclouds.osgi.export>org.jclouds.openstack.heat.v1*;version="${project.version}"</jclouds.osgi.export>
         <jclouds.osgi.import>
             org.jclouds.rest.internal;version="${project.version}",
-            org.jclouds*;version="${project.version}",1.8.1-CB-29
+            org.jclouds*;version="${project.version}",
             *
         </jclouds.osgi.import>
     </properties>

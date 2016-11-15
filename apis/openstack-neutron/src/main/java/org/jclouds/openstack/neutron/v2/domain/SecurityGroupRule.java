@@ -220,7 +220,7 @@ public class SecurityGroupRule {
       return new CreateBuilder(securityGroupId, direction);
    }
 
-   private static abstract class Builder<ParameterizedBuilderType> {
+   private abstract static class Builder<ParameterizedBuilderType> {
       protected SecurityGroupRule securityGroupRule;
 
       /**

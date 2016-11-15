@@ -146,7 +146,7 @@ public class SecurityGroup {
       return new CreateBuilder(name, description);
    }
 
-   private static abstract class Builder<ParameterizedBuilderType> {
+   private abstract static class Builder<ParameterizedBuilderType> {
       protected SecurityGroup securityGroup;
 
       /**

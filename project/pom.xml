@@ -946,10 +946,9 @@
           </instructions>
         </configuration>
       </plugin>
-      <plugin>
+      <!--plugin>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>2.15</version>
-        <!-- configuration and dependencies set via profiles -->
         <executions>
           <execution>
             <id>default</id>
@@ -959,7 +958,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin-->
       <!--plugin>
         <groupId>org.gaul</groupId>
         <artifactId>modernizer-maven-plugin</artifactId>
@@ -1311,8 +1310,7 @@
       </distributionManagement>
       <build>
         <plugins>
-          <plugin>
-            <!-- When building jclouds-project, override the config to use the local file -->
+          <!--plugin>
             <artifactId>maven-checkstyle-plugin</artifactId>
             <configuration>
               <configLocation>../resources/checkstyle.xml</configLocation>
@@ -1321,10 +1319,10 @@
               <failsOnError>true</failsOnError>
               <violationSeverity>warning</violationSeverity>
             </configuration>
-          </plugin>
+          </plugin-->
           <!--plugin>
             <groupId>org.gaul</groupId>
-            <artifactId>modernizer-maven-plugin</artifactId>
+            <artifactId>modernizer-maven-plu`gin</artifactId>
             <configuration>
               <javaVersion>${maven.compile.source}</javaVersion>
 
@@ -1344,7 +1342,7 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
+          <!--plugin>
             <artifactId>maven-checkstyle-plugin</artifactId>
             <dependencies>
               <dependency>
@@ -1354,14 +1352,13 @@
               </dependency>
             </dependencies>
             <configuration>
-              <!-- jclouds-resources has the checkstyle config in the classpath -->
               <configLocation>resources/checkstyle.xml</configLocation>
               <includeTestSourceDirectory>true</includeTestSourceDirectory>
               <failOnViolation>true</failOnViolation>
               <failsOnError>true</failsOnError>
               <violationSeverity>warning</violationSeverity>
             </configuration>
-          </plugin>
+          </plugin-->
           <!--plugin>
             <groupId>org.gaul</groupId>
             <artifactId>modernizer-maven-plugin</artifactId>

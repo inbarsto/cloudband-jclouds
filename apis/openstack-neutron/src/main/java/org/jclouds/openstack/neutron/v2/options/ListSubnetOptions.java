@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed to jclouds, Inc. (jclouds) under one or more
  * contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -21,9 +21,7 @@ package org.jclouds.openstack.neutron.v2.options;
 import com.google.common.collect.ImmutableSet;
 import org.jclouds.http.options.BaseHttpRequestOptions;
 
-/**
- * @author Nick Livens
- */
+
 public class ListSubnetOptions extends BaseHttpRequestOptions {
 
    public ListSubnetOptions networkId(String networkId) {

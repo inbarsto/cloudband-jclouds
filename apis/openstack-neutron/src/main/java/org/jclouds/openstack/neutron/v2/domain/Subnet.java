@@ -323,7 +323,7 @@ public class Subnet {
       return new UpdateBuilder();
    }
 
-   private static abstract class Builder<ParameterizedBuilderType> {
+   private abstract static class Builder<ParameterizedBuilderType> {
       protected Subnet subnet;
 
       /**

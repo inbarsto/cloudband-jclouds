@@ -186,7 +186,7 @@ public class FloatingIP {
       return new UpdateBuilder();
    }
 
-   private static abstract class Builder<ParameterizedBuilderType> {
+   private abstract static class Builder<ParameterizedBuilderType> {
       protected FloatingIP floatingIp;
 
       /**

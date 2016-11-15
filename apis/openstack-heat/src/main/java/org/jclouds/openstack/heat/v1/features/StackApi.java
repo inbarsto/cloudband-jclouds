@@ -90,14 +90,14 @@ public interface StackApi {
    @DELETE
    @Path("/{stack_name}/{stack_id}")
    @Fallback(FalseOnNotFoundOr404.class)
-   @Nullable
+//   @Nullable
    boolean delete(@PathParam("stack_name") String name, @PathParam("stack_id") String id);
 
    @Named("stack:update")
    @PUT
    @Path("/{stack_name}/{stack_id}")
    @Fallback(FalseOnNotFoundOr404.class)
-   @Nullable
+//   @Nullable
    boolean update(@PathParam("stack_name") String name, @PathParam("stack_id") String id, UpdateOptions... options);
 
 

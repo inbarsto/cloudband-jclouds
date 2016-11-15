@@ -110,7 +110,7 @@ public class NetPartition {
       return new CreateBuilder(name);
    }
 
-   private static abstract class Builder<ParameterizedBuilderType> {
+   private abstract static class Builder<ParameterizedBuilderType> {
       protected NetPartition netPartition;
 
       /**

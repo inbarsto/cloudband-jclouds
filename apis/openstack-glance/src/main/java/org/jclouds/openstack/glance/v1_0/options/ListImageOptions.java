@@ -119,7 +119,7 @@ public class ListImageOptions extends PaginationOptions {
     * Return only public images or only private images
     */
    public ListImageOptions isPublic(Boolean isPublic) {
-      queryParameters.put(IS_PUBLIC.asParam(), isPublic !=null ? Boolean.toString(isPublic) : "None");
+      queryParameters.put(IS_PUBLIC.asParam(), isPublic != null ? Boolean.toString(isPublic) : "None");
       return this;
    }
 
