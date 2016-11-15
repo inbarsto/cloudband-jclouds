@@ -47,7 +47,7 @@ public class BindGlanceObjectToRequest implements Binder {
          object.getContentMetadata().setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
       if (object.getContentMetadata().getContentLength() == null
-            || object.getContentMetadata().getContentLength() >= 2l * 1024 * 1024) {
+            || object.getContentMetadata().getContentLength() >= 2L * 1024 * 1024) {
          // Enable "chunked"/"streamed" data, where the size needn't be known in advance or size is simply too large.
          request = (R) request.toBuilder().replaceHeader("Transfer-Encoding", "chunked").build();
       }
