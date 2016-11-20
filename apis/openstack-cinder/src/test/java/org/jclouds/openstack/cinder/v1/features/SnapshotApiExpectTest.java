@@ -184,6 +184,8 @@ public class SnapshotApiExpectTest extends BaseCinderApiExpectTest {
    }
 
    protected Snapshot testSnapshot() {
+
+      SnapshotExtendedAttributes extendedAttributes = SnapshotExtendedAttributes.builder().projectId("cc03fd4f503f4d9c986b381b8abe6af5").build();
       return Snapshot.builder()
             .id("67d03df1-ce5d-4ba7-adbe-492ceb80170b")
             .volumeId("ea6f70ef-2784-40b9-9d14-d7f33c507c3f")
@@ -192,6 +194,7 @@ public class SnapshotApiExpectTest extends BaseCinderApiExpectTest {
             .name("jclouds-test-snapshot")
             .size(1)
             .created(dateService.iso8601DateParse("2012-11-02T16:23:27.000000"))
+            .extendedAttributes(extendedAttributes)
             .build();
    }
 

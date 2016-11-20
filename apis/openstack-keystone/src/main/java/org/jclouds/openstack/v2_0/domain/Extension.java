@@ -122,8 +122,8 @@ public class Extension extends Resource {
    @ConstructorProperties({
       "name", "links", "namespace", "alias", "updated", "description"
    })
-   protected Extension(@Nullable String name, Set<Link> links, @Nullable URI namespace, String alias,
-         @Nullable Date updated, String description) {
+   protected Extension(@Nullable String name, Set<Link> links, URI namespace, String alias,
+                       @Nullable Date updated, String description) {
       super(alias, name, links);
       this.namespace = namespace;
       this.alias = checkNotNull(alias, "alias");

@@ -1,0 +1,17 @@
+{
+    "limits": {
+        "rate": [],
+        "absolute": {
+            "totalSnapshotsUsed": 0,
+            "maxTotalBackups": 10,
+            "maxTotalVolumeGigabytes": 10000,
+            "maxTotalSnapshots": 50,
+            "maxTotalBackupGigabytes": 1000,
+            "totalBackupGigabytesUsed": 0,
+            "maxTotalVolumes": 100,
+            "totalVolumesUsed": 2,
+            "totalBackupsUsed": 0,
+            "totalGigabytesUsed": 100
+        }
+    }
+}

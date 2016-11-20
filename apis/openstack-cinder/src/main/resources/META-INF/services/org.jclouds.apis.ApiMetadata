@@ -1,0 +1,2 @@
+org.jclouds.openstack.cinder.v1.CinderApiMetadata
+org.jclouds.openstack.cinder.v2.CinderApiMetadata

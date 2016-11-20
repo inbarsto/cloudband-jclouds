@@ -14,16 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jclouds.openstack.cinder.v1.internal;
-
-import org.jclouds.openstack.cinder.v1.CinderApi;
+package org.jclouds.openstack.cinder.v1.extentions;
 
 /**
- * Base class for writing Volume Rest Api Expect tests
+ * Extension namespaces
  */
-public class BaseCinderApiExpectTest extends BaseCinderExpectTest<CinderApi> {
+public interface ExtensionNamespaces {
 
-    public BaseCinderApiExpectTest() {
-        super("openstack-cinder");
-    }
+   /**
+    * Admin Action extension
+    */
+   public static final String ADMIN_ACTIONS = "http://docs.openstack.org/ext/admin-actions/api/v1.1";
+
 }

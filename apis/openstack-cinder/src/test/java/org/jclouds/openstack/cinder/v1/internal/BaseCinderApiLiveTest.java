@@ -16,19 +16,20 @@
  */
 package org.jclouds.openstack.cinder.v1.internal;
 
-import java.util.Properties;
-
 import org.jclouds.apis.BaseApiLiveTest;
-import org.jclouds.openstack.cinder.v1.CinderApi;
 import org.jclouds.openstack.keystone.v2_0.config.KeystoneProperties;
+
+import java.io.Closeable;
+import java.util.Properties;
 
 /**
  * Tests behavior of CinderApi
  */
-public class BaseCinderApiLiveTest extends BaseApiLiveTest<CinderApi> {
+public class BaseCinderApiLiveTest<T extends Closeable> extends BaseApiLiveTest<T> {
 
-   public BaseCinderApiLiveTest() {
-      provider = "openstack-cinder";
+
+   public BaseCinderApiLiveTest(String provider) {
+      this.provider = provider;
    }
 
    @Override
