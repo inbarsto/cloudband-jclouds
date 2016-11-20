@@ -14,28 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jclouds.openstack.cinder.v1.internal;
-
-import org.jclouds.apis.BaseApiLiveTest;
-import org.jclouds.openstack.keystone.v2_0.config.KeystoneProperties;
-
-import java.io.Closeable;
-import java.util.Properties;
+package org.jclouds.openstack.cinder.v1.extentions;
 
 /**
- * Tests behavior of CinderApi
+ * Extension namespaces
  */
-public class BaseCinderApiLiveTest<T extends Closeable> extends BaseApiLiveTest<T> {
+public interface ExtensionNamespaces {
 
+   /**
+    * Admin Action extension
+    */
+   public static final String ADMIN_ACTIONS = "http://docs.openstack.org/ext/admin-actions/api/v1.1";
 
-   public BaseCinderApiLiveTest(String provider) {
-      this.provider = provider;
-   }
-
-   @Override
-   protected Properties setupProperties() {
-      Properties props = super.setupProperties();
-      setIfTestSystemPropertyPresent(props, KeystoneProperties.CREDENTIAL_TYPE);
-      return props;
-   }
 }
