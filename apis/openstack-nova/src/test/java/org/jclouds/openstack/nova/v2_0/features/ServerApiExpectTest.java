@@ -18,6 +18,7 @@ package org.jclouds.openstack.nova.v2_0.features;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import org.jclouds.http.HttpRequest;
 import org.jclouds.http.HttpResponse;
@@ -496,6 +497,98 @@ public class ServerApiExpectTest extends BaseNovaApiExpectTest {
       for (int statusCode : ImmutableSet.of(403, 404, 500)) {
         assertTrue(!requestsSendResponses(keystoneAuthWithUsernameAndPasswordAndTenantName, responseWithKeystoneAccess, getDiagnostics,
             HttpResponse.builder().statusCode(statusCode).build()).getServerApi("az-1.region-a.geo-1").getDiagnostics(serverId).isPresent());
+      }
+   }
+
+   public void testAddSecurityGroupWhenResponseIs2xx() throws Exception {
+      String serverId = "123";
+      HttpRequest addSecurityGroup = HttpRequest
+            .builder()
+            .method("POST")
+            .endpoint("https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2/3456/servers/" + serverId + "/action")
+            .addHeader("Accept", "application/json")
+            .addHeader("X-Auth-Token", authToken)
+
+            .payload(payloadFromStringWithContentType(
+                  "{\"addSecurityGroup\":{\"name\":\"test\"}}", "application/json"))
+            .build();
+
+      HttpResponse addSecurityGroupResponse = HttpResponse.builder().statusCode(200).build();
+
+      NovaApi apiWhenServerExists = requestsSendResponses(keystoneAuthWithUsernameAndPasswordAndTenantName,
+            responseWithKeystoneAccess, addSecurityGroup, addSecurityGroupResponse);
+
+      apiWhenServerExists.getServerApiForZone("az-1.region-a.geo-1").addSecurityGroup(serverId, "test");
+   }
+
+   public void testAddSecurityGroupWhenResponseIs404() throws Exception {
+      String serverId = "123";
+      HttpRequest addSecurityGroup = HttpRequest
+            .builder()
+            .method("POST")
+            .endpoint("https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2/3456/servers/" + serverId + "/action")
+            .addHeader("Accept", "application/json")
+            .addHeader("X-Auth-Token", authToken)
+            .payload(payloadFromStringWithContentType(
+                  "{\"addSecurityGroup\":{\"name\":\"test\"}}", "application/json"))
+            .build();
+
+      HttpResponse addSecurityGroupResponse = HttpResponse.builder().statusCode(404).build();
+
+      NovaApi apiWhenServerExists = requestsSendResponses(keystoneAuthWithUsernameAndPasswordAndTenantName,
+            responseWithKeystoneAccess, addSecurityGroup, addSecurityGroupResponse);
+
+      try {
+         apiWhenServerExists.getServerApiForZone("az-1.region-a.geo-1").addSecurityGroup(serverId, "test");
+         fail("Expected an exception.");
+      } catch (Exception e) {
+
+      }
+   }
+
+   public void testRemoveSecurityGroupWhenResponseIs2xx() throws Exception {
+      String serverId = "123";
+      HttpRequest removeSecurityGroup = HttpRequest
+            .builder()
+            .method("POST")
+            .endpoint("https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2/3456/servers/" + serverId + "/action")
+            .addHeader("Accept", "application/json")
+            .addHeader("X-Auth-Token", authToken)
+
+            .payload(payloadFromStringWithContentType(
+                  "{\"removeSecurityGroup\":{\"name\":\"test\"}}", "application/json"))
+            .build();
+
+      HttpResponse removeSecurityGroupResponse = HttpResponse.builder().statusCode(200).build();
+
+      NovaApi apiWhenServerExists = requestsSendResponses(keystoneAuthWithUsernameAndPasswordAndTenantName,
+            responseWithKeystoneAccess, removeSecurityGroup, removeSecurityGroupResponse);
+
+      apiWhenServerExists.getServerApiForZone("az-1.region-a.geo-1").removeSecurityGroup(serverId, "test");
+   }
+
+   public void testRemoveSecurityGroupWhenResponseIs404() throws Exception {
+      String serverId = "123";
+      HttpRequest removeSecurityGroup = HttpRequest
+            .builder()
+            .method("POST")
+            .endpoint("https://az-1.region-a.geo-1.compute.hpcloudsvc.com/v2/3456/servers/" + serverId + "/action")
+            .addHeader("Accept", "application/json")
+            .addHeader("X-Auth-Token", authToken)
+            .payload(payloadFromStringWithContentType(
+                  "{\"removeSecurityGroup\":{\"name\":\"test\"}}", "application/json"))
+            .build();
+
+      HttpResponse removeSecurityGroupResponse = HttpResponse.builder().statusCode(404).build();
+
+      NovaApi apiWhenServerExists = requestsSendResponses(keystoneAuthWithUsernameAndPasswordAndTenantName,
+            responseWithKeystoneAccess, removeSecurityGroup, removeSecurityGroupResponse);
+
+      try {
+         apiWhenServerExists.getServerApiForZone("az-1.region-a.geo-1").removeSecurityGroup(serverId, "test");
+         fail("Expected an exception.");
+      } catch (Exception e) {
+
       }
    }
 }

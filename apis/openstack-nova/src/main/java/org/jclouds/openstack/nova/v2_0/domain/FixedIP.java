@@ -34,7 +34,7 @@ public class FixedIP {
    protected final String subnetId;
 
    @ConstructorProperties({ "ip_address", "subnet_id" })
-   protected FixedIP(String ipAddress, String subnetId) {
+   public FixedIP(String ipAddress, String subnetId) {
       this.ipAddress = ipAddress;
       this.subnetId = subnetId;
    }

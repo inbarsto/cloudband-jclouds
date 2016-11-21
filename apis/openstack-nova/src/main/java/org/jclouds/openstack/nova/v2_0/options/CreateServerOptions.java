@@ -328,7 +328,6 @@ public class CreateServerOptions implements MapBinder {
     * Set to true to use a config drive for metadata.
     * This is a separate configuration drive that can be used separately from the metadata service.
     * This needs to be set to "true" when trying to use user data for cloud-init.
-    * @see http://docs.openstack.org/grizzly/openstack-compute/admin/content/config-drive.html
     */
    public CreateServerOptions configDrive(boolean configDrive) {
       this.configDrive = configDrive;
@@ -427,8 +426,6 @@ public class CreateServerOptions implements MapBinder {
     * <p/>
     * <h3>Note</h3>
     * <p/>
-    * This requires that {@link NovaApi#getSecurityGroupExtensionApi(String)} to return
-    * {@link Optional#isPresent present}
     */
    public Set<String> getSecurityGroupNames() {
       return securityGroupNames;
@@ -456,9 +453,7 @@ public class CreateServerOptions implements MapBinder {
 
    /**
     * When you create a server from an image with the diskConfig value set to
-    * {@link Server#DISK_CONFIG_AUTO}, the server is built with a single partition that is expanded to
     * the disk size of the flavor selected. When you set the diskConfig attribute to
-    * {@link Server#DISK_CONFIG_MANUAL}, the server is built by using the partition scheme and file
     * system that is in the source image.
     * <p/>
     * If the target flavor disk is larger, remaining disk space is left unpartitioned. A server inherits the diskConfig

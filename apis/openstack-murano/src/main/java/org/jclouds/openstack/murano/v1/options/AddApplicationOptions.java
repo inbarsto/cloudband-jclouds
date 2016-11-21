@@ -161,6 +161,10 @@ public class AddApplicationOptions implements MapBinder {
          return muranoPackage(muranoPackage, name,templateParameters, null);
       }
 
+      public static AddApplicationOptions muranoPackage(MuranoPackage muranoPackage, String name, String environmentName) {
+         return muranoPackage(muranoPackage, name, null, environmentName);
+      }
+
       public static AddApplicationOptions muranoPackage(MuranoPackage muranoPackage, String name,@Nullable Map<String,Object> templateParameters,@Nullable String environmentName) {
          Map<String, Object> properties = Maps.newHashMap();
          properties.put(TYPE, muranoPackage.getFullyQualifiedName());

@@ -17,7 +17,9 @@
 package org.jclouds.openstack.nova.v2_0.extensions;
 
 /**
- * OpenStack Nova Extension Namespaces
+ * Extension namespaces
+ *
+ * @see <a href= "http://nova.openstack.org/api_ext/" />
  */
 public final class ExtensionNamespaces {
    /**
@@ -113,6 +115,10 @@ public final class ExtensionNamespaces {
     */
    public static final String BLOCK_DEVICE_MAPPING_V2_BOOT =
          "http://docs.openstack.org/compute/ext/block_device_mapping_v2_boot/api/v2";
+   /**
+    * OS-Services extension
+    */
+   public static final String OS_SERVICES = "http://docs.openstack.org/compute/ext/services/api/v2";
    /**
     * Floating IP pools support
     */
