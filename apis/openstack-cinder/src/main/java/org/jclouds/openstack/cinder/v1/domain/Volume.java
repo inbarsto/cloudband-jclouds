@@ -39,7 +39,7 @@ import com.google.common.collect.ImmutableSet;
 public class Volume {
 
    public static enum Status {
-      CREATING, AVAILABLE, ATTACHING, IN_USE, DELETING, ERROR, ERROR_DELETING, UNRECOGNIZED;
+      CREATING, AVAILABLE, ATTACHING, IN_USE, DETACHING, DELETING, ERROR, ERROR_DELETING, UNRECOGNIZED;
       
       public String value() {
          return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, name());
