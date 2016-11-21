@@ -29,86 +29,86 @@ import org.jclouds.openstack.v2_0.options.PaginationOptions;
  */
 public class ListOptions extends PaginationOptions {
 
-    public static final ListOptions NONE = new ListOptions();
+   public static final ListOptions NONE = new ListOptions();
 
-    /**
-     * unless used, only the name and id will be returned per row.
-     */
-    public ListOptions withDetails() {
-        this.pathSuffix = "/detail";
-        return this;
-    }
+   /**
+    * unless used, only the name and id will be returned per row.
+    */
+   public ListOptions withDetails() {
+      this.pathSuffix = "/detail";
+      return this;
+   }
 
-    /**
-     * list resources of all tenants
-     */
-    public ListOptions allTenants() {
-        queryParameters.put("all_tenants", "1");
-        return this;
-    }
+   /**
+    * list resources of all tenants
+    */
+   public ListOptions allTenants() {
+      queryParameters.put("all_tenants", "1");
+      return this;
+   }
 
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ListOptions changesSince(Date ifModifiedSince) {
-        super.changesSince(ifModifiedSince);
-        return this;
-    }
+   /**
+    * {@inheritDoc}
+    */
+   @Override
+   public ListOptions changesSince(Date ifModifiedSince) {
+      super.changesSince(ifModifiedSince);
+      return this;
+   }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ListOptions limit(int limit) {
-        super.limit(limit);
-        return this;
+   /**
+    * {@inheritDoc}
+    */
+   @Override
+   public ListOptions limit(int limit) {
+      super.limit(limit);
+      return this;
 
-    }
+   }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ListOptions marker(String marker) {
-        super.marker(marker);
-        return this;
-    }
+   /**
+    * {@inheritDoc}
+    */
+   @Override
+   public ListOptions marker(String marker) {
+      super.marker(marker);
+      return this;
+   }
 
-    public static class Builder {
+   public static class Builder {
 
-        /**
-         * @see ListOptions#withDetails()
-         */
-        public static ListOptions withDetails() {
-            ListOptions options = new ListOptions();
-            return options.withDetails();
-        }
+      /**
+       * @see ListOptions#withDetails()
+       */
+      public static ListOptions withDetails() {
+         ListOptions options = new ListOptions();
+         return options.withDetails();
+      }
 
-        /**
-         * @see PaginationOptions#marker(String)
-         */
-        public static ListOptions marker(String marker) {
-            ListOptions options = new ListOptions();
-            return options.marker(marker);
-        }
+      /**
+       * @see PaginationOptions#marker(String)
+       */
+      public static ListOptions marker(String marker) {
+         ListOptions options = new ListOptions();
+         return options.marker(marker);
+      }
 
-        /**
-         * @see PaginationOptions#limit(int)
-         */
-        public static ListOptions maxResults(int maxKeys) {
-            ListOptions options = new ListOptions();
-            return options.limit(maxKeys);
-        }
+      /**
+       * @see PaginationOptions#limit(long)
+       */
+      public static ListOptions maxResults(int maxKeys) {
+         ListOptions options = new ListOptions();
+         return options.limit(maxKeys);
+      }
 
-        /**
-         * @see PaginationOptions#changesSince(Date)
-         */
-        public static ListOptions changesSince(Date since) {
-            ListOptions options = new ListOptions();
-            return options.changesSince(since);
-        }
+      /**
+       * @see PaginationOptions#changesSince(Date)
+       */
+      public static ListOptions changesSince(Date since) {
+         ListOptions options = new ListOptions();
+         return options.changesSince(since);
+      }
 
-    }
+   }
 }

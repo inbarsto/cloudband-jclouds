@@ -311,6 +311,14 @@
           "namespace": "http://docs.openstack.org/compute/ext/hypervisors/api/v1.1",
           "alias": "os-hypervisors",
           "description": "Admin-only hypervisor administration."
+        },
+        {
+            "updated": "2012-10-28T00:00:00-00:00",
+            "name": "Services",
+            "links": [],
+            "namespace": "http://docs.openstack.org/compute/ext/services/api/v2",
+            "alias": "os-services",
+            "description": "Services support."
         }
     ]
 }

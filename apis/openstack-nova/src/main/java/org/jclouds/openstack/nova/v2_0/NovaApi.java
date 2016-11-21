@@ -30,6 +30,7 @@ import org.jclouds.openstack.nova.v2_0.extensions.HostAdministrationApi;
 import org.jclouds.openstack.nova.v2_0.extensions.HostAggregateApi;
 import org.jclouds.openstack.nova.v2_0.extensions.HypervisorApi;
 import org.jclouds.openstack.nova.v2_0.extensions.KeyPairApi;
+import org.jclouds.openstack.nova.v2_0.extensions.OsServicesApi;
 import org.jclouds.openstack.nova.v2_0.extensions.QuotaApi;
 import org.jclouds.openstack.nova.v2_0.extensions.SecurityGroupApi;
 import org.jclouds.openstack.nova.v2_0.extensions.ServerAdminApi;
@@ -41,6 +42,7 @@ import org.jclouds.openstack.nova.v2_0.extensions.VolumeAttachmentApi;
 import org.jclouds.openstack.nova.v2_0.extensions.VolumeTypeApi;
 import org.jclouds.openstack.nova.v2_0.features.FlavorApi;
 import org.jclouds.openstack.nova.v2_0.features.ImageApi;
+import org.jclouds.openstack.nova.v2_0.features.InterfaceApi;
 import org.jclouds.openstack.nova.v2_0.features.ServerApi;
 import org.jclouds.openstack.v2_0.features.ExtensionApi;
 import org.jclouds.rest.annotations.Delegate;
@@ -470,5 +472,34 @@ public interface NovaApi extends Closeable {
    @Deprecated
    @Delegate
    Optional<? extends ConsolesApi> getConsolesExtensionForZone(
+           @EndpointParam(parser = RegionToEndpoint.class) String zone);
+
+   /**
+    * Provides synchronous access to Floating IP Pool features.
+    */
+   @Delegate
+   Optional<? extends FloatingIPPoolApi> getFloatingIPPoolExtensionForZone(
          @EndpointParam(parser = RegionToEndpoint.class) String zone);
+
+
+
+   /**
+    * Provides synchronous access to interface Type features.
+    */
+   @Delegate
+   Optional<? extends InterfaceApi> getInterfaceApiForZone(
+           @EndpointParam(parser = RegionToEndpoint.class) String zone);
+
+   /**
+    * Provides access to OS-Services features.
+    *
+    * <h3>NOTE</h3>
+    * This API is an extension that may or may not be present in your OpenStack cloud. Use the Optional return type
+    * to determine if it is present.
+    */
+   @Delegate
+   Optional<? extends OsServicesApi> getOsServicesApi(
+         @EndpointParam(parser = RegionToEndpoint.class) String region);
+
+
 }

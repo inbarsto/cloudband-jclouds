@@ -15,40 +15,51 @@
  * limitations under the License.
  */
 
-package org.jclouds.openstack.cinder.v1.options;
+package org.jclouds.openstack.nova.v2_0.options;
 
 import java.util.Date;
 
-/**
- * Options used to control list of volumes results.
- */
-public class ListVolumeOptions extends ListOptions {
+import static com.google.common.base.Preconditions.checkNotNull;
 
-   public static final ListVolumeOptions NONE = new ListVolumeOptions();
+/**
+ * Options used to control list of servers results.
+ */
+public class ListServerOptions extends ListOptions {
+
+   public static final ListServerOptions NONE = new ListServerOptions();
+
+   /**
+    * list servers by host name
+    *
+    */
+   public ListServerOptions host(String host) {
+      queryParameters.put("host", checkNotNull(host, "host"));
+      return this;
+   }
+
+   /**
+    * list servers of all tenants
+    *
+    */
+   public ListServerOptions allTenants() {
+      queryParameters.put("all_tenants", "1");
+      return this;
+   }
 
    /**
     * {@inheritDoc}
     */
    @Override
-   public ListVolumeOptions withDetails() {
+   public ListServerOptions withDetails() {
       super.withDetails();
       return this;
    }
-   
-   /**
-    * list volumes of all tenants
-    */
-   @Override
-   public ListVolumeOptions allTenants() {
-      super.allTenants();
-      return this;
-   }
 
    /**
     * {@inheritDoc}
     */
    @Override
-   public ListVolumeOptions changesSince(Date ifModifiedSince) {
+   public ListServerOptions changesSince(Date ifModifiedSince) {
       super.changesSince(ifModifiedSince);
       return this;
    }
@@ -57,7 +68,7 @@ public class ListVolumeOptions extends ListOptions {
     * {@inheritDoc}
     */
    @Override
-   public ListVolumeOptions limit(int limit) {
+   public ListServerOptions limit(int limit) {
       super.limit(limit);
       return this;
 
@@ -67,53 +78,60 @@ public class ListVolumeOptions extends ListOptions {
     * {@inheritDoc}
     */
    @Override
-   public ListVolumeOptions marker(String marker) {
+   public ListServerOptions marker(String marker) {
       super.marker(marker);
       return this;
    }
 
+
    public static class Builder {
 
       /**
-       * @see ListVolumeOptions#allTenants()
+       * @see ListServerOptions#host(String)
        */
-      public static ListVolumeOptions allTenants() {
-         ListVolumeOptions options = new ListVolumeOptions();
+      public static ListServerOptions host(String host) {
+         ListServerOptions options = new ListServerOptions();
+         return options.host(host);
+      }
+
+      /**
+       * @see ListServerOptions#allTenants()
+       */
+      public static ListServerOptions allTenants() {
+         ListServerOptions options = new ListServerOptions();
          return options.allTenants();
       }
 
       /**
        * @see ListOptions#withDetails()
        */
-      public static ListVolumeOptions withDetails() {
-         ListVolumeOptions options = new ListVolumeOptions();
+      public static ListServerOptions withDetails() {
+         ListServerOptions options = new ListServerOptions();
          return options.withDetails();
       }
 
       /**
        * @see org.jclouds.openstack.v2_0.options.PaginationOptions#marker(String)
        */
-      public static ListVolumeOptions marker(String marker) {
-         ListVolumeOptions options = new ListVolumeOptions();
+      public static ListServerOptions marker(String marker) {
+         ListServerOptions options = new ListServerOptions();
          return options.marker(marker);
       }
 
       /**
        * @see org.jclouds.openstack.v2_0.options.PaginationOptions#limit(int)
        */
-      public static ListVolumeOptions maxResults(int maxKeys) {
-         ListVolumeOptions options = new ListVolumeOptions();
+      public static ListServerOptions maxResults(int maxKeys) {
+         ListServerOptions options = new ListServerOptions();
          return options.limit(maxKeys);
       }
 
       /**
        * @see org.jclouds.openstack.v2_0.options.PaginationOptions#changesSince(Date)
        */
-      public static ListVolumeOptions changesSince(Date since) {
-         ListVolumeOptions options = new ListVolumeOptions();
+      public static ListServerOptions changesSince(Date since) {
+         ListServerOptions options = new ListServerOptions();
          return options.changesSince(since);
       }
    }
-
 }
-
