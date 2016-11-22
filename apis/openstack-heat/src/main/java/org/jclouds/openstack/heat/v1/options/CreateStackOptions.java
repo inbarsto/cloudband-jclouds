@@ -16,234 +16,101 @@
  */
 package org.jclouds.openstack.heat.v1.options;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableMap;
-import org.jclouds.http.HttpRequest;
-import org.jclouds.rest.MapBinder;
-import org.jclouds.rest.binders.BindToJsonPayload;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.Map;
 
-import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.jclouds.javax.annotation.Nullable;
+import org.jclouds.json.SerializedNames;
+
+import com.google.auto.value.AutoValue;
+import com.google.common.collect.ImmutableMap;
 
 /**
- *
+ * Representation of create stack  options.
  */
-public class CreateStackOptions implements MapBinder {
+@AutoValue
+public abstract class CreateStackOptions {
 
-   public static final CreateStackOptions NONE = new CreateStackOptions();
+    /**
+     * @see Builder#name(String)
+     */
+    public abstract String getName();
 
-   @Inject
-   private BindToJsonPayload jsonBinder;
+    /**
+     * @see Builder#template(String)
+     */
+    @Nullable public abstract String getTemplate();
 
-   protected String name;
-   protected String templateUrl;
-   protected String template;
-   protected Map<String, Object> parameters = ImmutableMap.of();
-   private boolean disableRollback = true;
-   protected Map<String, String> files = ImmutableMap.of();
-   protected String environment;
+    /**
+     * @see Builder#templateUrl(String)
+     */
+    @Nullable public abstract String getTemplateUrl();
 
-   static class CreateStackRequest {
+    /**
+     * @see Builder#parameters(Map<String, Object>)
+     */
+    @Nullable public abstract Map<String, Object> getParameters();
 
-      @Named("stack_name")
-      String name;
-      @Named("template_url")
-      String templateUrl;
-      String template;
-      Map<String, Object> parameters = ImmutableMap.of();
-      @Named("disable_rollback")
-      boolean disableRollback;
-      Map<String, String> files = ImmutableMap.of();
-      String environment;
+    /**
+     * @see Builder#disableRollback(boolean)
+     */
+    public abstract boolean isDisableRollback();
 
-      private CreateStackRequest(String name) {
-         this.name = name;
-      }
+    /**
+     * @see Builder#files(Map<String, String>)
+     */
+    @Nullable public abstract Map<String, String> getFiles();
 
-   }
+    /**
+     * @see Builder#environment(String)
+     */
+    @Nullable public abstract String getEnvironment();
 
-   @Override
-   public <R extends HttpRequest> R bindToRequest(R request, Map<String, Object> postParams) {
+    public Builder toBuilder() {
+        return builder()
+                .name(getName())
+                .template(getTemplate())
+                .templateUrl(getTemplateUrl())
+                .parameters(getParameters())
+                .disableRollback(isDisableRollback())
+                .files(getFiles())
+                .environment(getEnvironment());
+    }
 
-      CreateStackRequest creaetStackRequest = new CreateStackRequest(checkNotNull(postParams.get("stack_name"), "name parameter not present").toString());
-      if (templateUrl != null)
-         creaetStackRequest.templateUrl = templateUrl;
-      if (template != null)
-         creaetStackRequest.template = template;
-      if (!parameters.isEmpty())
-         creaetStackRequest.parameters = parameters;
-      if (!files.isEmpty())
-         creaetStackRequest.files = files;
-      if (environment != null)
-         creaetStackRequest.environment = environment;
+    @SerializedNames({"stack_name", "template", "template_url", "parameters", "disable_rollback", "files", "environment" })
+    private static CreateStackOptions create(String name, @Nullable String template, @Nullable String templateUrl, @Nullable Map<String, Object> parameters, boolean disableRollback, @Nullable Map<String, String> files, @Nullable String environment) {
+        return builder()
+                .name(name)
+                .template(template)
+                .templateUrl(templateUrl)
+                .parameters(parameters)
+                .disableRollback(disableRollback)
+                .files(files)
+                .environment(environment).build();
+    }
 
-      creaetStackRequest.disableRollback = disableRollback;
+    public static Builder builder() {
+        return new AutoValue_CreateStackOptions.Builder().disableRollback(true).files(null).environment(null);
+    }
 
-      return jsonBinder.bindToRequest(request, creaetStackRequest);
-   }
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder name(String name);
+        public abstract Builder template(String template);
+        public abstract Builder templateUrl(String templateUrl);
+        public abstract Builder parameters(Map<String, Object> parameters);
+        public abstract Builder disableRollback(boolean disableRollback);
+        public abstract Builder files(Map<String, String> files);
+        public abstract Builder environment(String environment);
 
-   @Override
-   public <R extends HttpRequest> R bindToRequest(R request, Object toBind) {
-      throw new IllegalStateException("createStackRequest is a POST operation");
-   }
+        abstract Map<String, Object> getParameters();
+        abstract Map<String, String> getFiles();
 
+        abstract CreateStackOptions autoBuild();
 
-
-   /**
-    * @param templateUrl - A URI to the location containing the stack template to instantiate.
-    */
-   public CreateStackOptions templateUrl(String templateUrl) {
-      this.templateUrl = templateUrl;
-      return this;
-   }
-
-   /**
-    * @param template - The stack template to instantiate.
-    */
-   public CreateStackOptions template(String template) {
-      this.template = template;
-      return this;
-   }
-
-   /**
-    * @param parameters - The properties for the template
-    */
-   public CreateStackOptions parameters(Map<String, Object> parameters) {
-      this.parameters = parameters;
-      return this;
-   }
-
-   /**
-    * @param disableRollback - Controls whether a failure during stack creation causes deletion of all previously-created resources in that stack. The default is True
-    */
-   public CreateStackOptions disableRollback(boolean disableRollback) {
-      this.disableRollback = disableRollback;
-      return this;
-   }
-
-   /**
-    * @param files - The properties for the template
-    */
-   public CreateStackOptions files(Map<String, String> files) {
-      this.files = files;
-      return this;
-   }
-
-   /**
-    * @param environment - used to affect the runtime behaviour of the template
-    */
-   public CreateStackOptions environment(String environment) {
-      this.environment = environment;
-      return this;
-   }
-
-   public String getTemplateUrl() {
-      return templateUrl;
-   }
-
-   public String getTemplate() {
-      return template;
-   }
-
-   public Map<String, Object> getParameters() {
-      return parameters;
-   }
-
-   public boolean isDisableRollback() {
-      return disableRollback;
-   }
-
-   public Map<String, String> getFiles() {
-      return files;
-   }
-
-   public String getEnvironment() {
-      return environment;
-   }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
+        public CreateStackOptions build() {
+            parameters(getParameters() != null ? ImmutableMap.copyOf(getParameters()) : null);
+            files(getFiles() != null ? ImmutableMap.copyOf(getFiles()) : null);
+            return autoBuild();
         }
-        if (!(object instanceof CreateStackOptions)) return false;
-        final CreateStackOptions other = CreateStackOptions.class.cast(object);
-        return equal(templateUrl, other.templateUrl)
-                && equal(template, other.template)
-                && equal(parameters, other.parameters)
-                && equal(disableRollback, other.parameters)
-                && equal(files, other.files)
-                && equal(environment, other.environment);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(templateUrl, template, parameters, disableRollback, files, environment);
-    }
-
-    protected Objects.ToStringHelper string() {
-        return toStringHelper("")
-                .add("templateUrl", templateUrl)
-                .add("template", template)
-                .add("parameters", parameters)
-                .add("disableRollback", disableRollback)
-                .add("files", files)
-                .add("environment", environment);
-    }
-
-    @Override
-    public String toString() {
-        return string().toString();
-    }
-
-
-    public static class Builder {
-
-      /**
-       * @see CreateStackOptions#getTemplateUrl()
-       */
-      public static CreateStackOptions templateUrl(String templateUrl) {
-         return new CreateStackOptions().templateUrl(templateUrl);
-      }
-
-      /**
-       * @see CreateStackOptions#getTemplate()
-       */
-      public static CreateStackOptions template(String template) {
-         return new CreateStackOptions().template(template);
-      }
-
-      /**
-       * @see CreateStackOptions#getParameters() () ()
-       */
-      public static CreateStackOptions parameters(Map<String, Object> parameters) {
-         return new CreateStackOptions().parameters(parameters);
-      }
-
-      /**
-       * @see CreateStackOptions#isDisableRollback()
-       */
-      public static CreateStackOptions disableRollback(boolean disableRollback) {
-         return new CreateStackOptions().disableRollback(disableRollback);
-      }
-
-      /**
-       * @see CreateStackOptions#getFiles()
-       */
-      public static CreateStackOptions files(Map<String, String> files) {
-         return new CreateStackOptions().files(files);
-      }
-
-      /**
-       * @see CreateStackOptions#getEnvironment()
-       */
-      public static CreateStackOptions environment(String environment) {
-         return new CreateStackOptions().environment(environment);
-      }
-   }
 }

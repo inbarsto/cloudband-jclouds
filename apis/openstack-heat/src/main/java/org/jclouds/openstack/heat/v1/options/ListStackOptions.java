@@ -1,12 +1,12 @@
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements. See the NOTICE file distributed with
+ * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
+ * the License.  You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,7 @@
 package org.jclouds.openstack.heat.v1.options;
 
 import com.google.common.base.CaseFormat;
-import org.jclouds.openstack.heat.v1.domain.Stack.Status;
+import org.jclouds.openstack.heat.v1.domain.StackStatus;
 import org.jclouds.openstack.v2_0.options.PaginationOptions;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -144,7 +144,7 @@ public class ListStackOptions extends PaginationOptions {
     * Filters the stack list by the specified status. You can use this filter multiple
     * times to filter by multiple statuses.
     */
-   public ListStackOptions status(Status status) {
+   public ListStackOptions status(StackStatus status) {
       this.queryParameters.put("status", checkNotNull(status.toString(), "status"));
       return this;
    }
@@ -157,21 +157,13 @@ public class ListStackOptions extends PaginationOptions {
       return this;
    }
 
-    /**
-     * Return all the stack of all the tenant
-     */
-    public ListStackOptions globalTenant(Boolean globalTenant) {
-        this.queryParameters.put("global_tenant", globalTenant !=null ? Boolean.toString(globalTenant) : "false");
-        return this;
-    }
-
-    /**
-     * Include nested stacks in the stack listing.
-     */
-    public ListStackOptions showNested(Boolean showNested) {
-        this.queryParameters.put("show_nested", showNested !=null ? Boolean.toString(showNested) : "false");
-        return this;
-    }
+   /**
+    * Return all the stack of all the tenant
+    */
+   public ListStackOptions globalTenant(boolean globalTenant) {
+      this.queryParameters.put("global_tenant", Boolean.toString(globalTenant));
+      return this;
+   }
 
    /**
     * Sorts the stack list by one of these attributes:
@@ -189,6 +181,14 @@ public class ListStackOptions extends PaginationOptions {
    public ListStackOptions sortDirection(SortDirection direction) {
       checkState(SortDirection.contains(direction), "direction is either asc or desc");
       this.queryParameters.put("sort_dir", checkNotNull(direction.toString(), "direction"));
+      return this;
+   }
+
+   /**
+    * Include nested stacks in the stack listing.
+    */
+   public ListStackOptions showNested(boolean showNested) {
+      this.queryParameters.put("show_nested",  Boolean.toString(showNested));
       return this;
    }
 
@@ -215,7 +215,7 @@ public class ListStackOptions extends PaginationOptions {
       /**
        * @see ListStackOptions#status(String)
        */
-      public static ListStackOptions status(Status status) {
+      public static ListStackOptions status(StackStatus status) {
          return new ListStackOptions().status(status);
       }
 
@@ -241,17 +241,18 @@ public class ListStackOptions extends PaginationOptions {
       }
 
       /**
-       * @see ListStackOptions#globalTenant(Boolean)
+       * @see ListStackOptions#globalTenant(boolean)
        */
-      public static ListStackOptions globalTenant(Boolean globalTenant) {
+      public static ListStackOptions globalTenant(boolean globalTenant) {
          return new ListStackOptions().globalTenant(globalTenant);
       }
 
-       /**
-        * @see ListStackOptions#showNested(Boolean)
-        */
-       public static ListStackOptions showNested(Boolean showNested) {
-           return new ListStackOptions().showNested(showNested);
-       }
+      /**
+       * @see ListStackOptions#showNested(boolean)
+       */
+      public static ListStackOptions showNested(boolean showNested) {
+         return new ListStackOptions().showNested(showNested);
+      }
    }
+
 }

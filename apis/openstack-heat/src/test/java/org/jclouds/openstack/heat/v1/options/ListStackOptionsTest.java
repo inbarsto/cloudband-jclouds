@@ -26,7 +26,7 @@ import static org.jclouds.openstack.heat.v1.options.ListStackOptions.Builder.sor
 import static org.jclouds.openstack.heat.v1.options.ListStackOptions.Builder.status;
 import static org.jclouds.openstack.heat.v1.options.ListStackOptions.Builder.showNested;
 
-import org.jclouds.openstack.heat.v1.domain.Stack.Status;
+import org.jclouds.openstack.heat.v1.domain.StackStatus;
 import org.jclouds.openstack.heat.v1.options.ListStackOptions.SortDirection;
 import org.jclouds.openstack.heat.v1.options.ListStackOptions.SortKey;
 import org.testng.annotations.Test;
@@ -60,15 +60,15 @@ public class ListStackOptionsTest {
    }
 
    public void testStatus() {
-      ListStackOptions options = new ListStackOptions().status(Status.CREATE_COMPLETE);
+      ListStackOptions options = new ListStackOptions().status(StackStatus.CREATE_COMPLETE);
       assertThat(options.buildQueryParameters().get("status"))
-            .isEqualTo(ImmutableSet.of(Status.CREATE_COMPLETE.toString()));
+            .isEqualTo(ImmutableSet.of(StackStatus.CREATE_COMPLETE.toString()));
    }
 
    public void testStatusStatic() {
-      ListStackOptions options = status(Status.CREATE_COMPLETE);
+      ListStackOptions options = status(StackStatus.CREATE_COMPLETE);
       assertThat(options.buildQueryParameters().get("status"))
-            .isEqualTo(ImmutableSet.of(Status.CREATE_COMPLETE.toString()));
+            .isEqualTo(ImmutableSet.of(StackStatus.CREATE_COMPLETE.toString()));
    }
 
    public void testName() {

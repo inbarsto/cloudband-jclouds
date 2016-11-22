@@ -25,6 +25,7 @@
         <version>2.0.0-CB-2</version>
         <relativePath>../../project/pom.xml</relativePath>
     </parent>
+
     <groupId>org.apache.jclouds.api</groupId>
     <artifactId>openstack-heat</artifactId>
     <name>jclouds openstack-heat api</name>
@@ -35,72 +36,51 @@
         <!-- keystone endpoint -->
         <test.openstack-heat.endpoint>http://localhost:5000/v2.0/</test.openstack-heat.endpoint>
         <test.openstack-heat.api-version>1</test.openstack-heat.api-version>
-        <test.openstack-heat.build-version/>
+        <test.openstack-heat.build-version />
         <test.openstack-heat.identity>FIXME_IDENTITY</test.openstack-heat.identity>
         <test.openstack-heat.credential>FIXME_CREDENTIALS</test.openstack-heat.credential>
         <test.jclouds.keystone.credential-type>passwordCredentials</test.jclouds.keystone.credential-type>
         <jclouds.osgi.export>org.jclouds.openstack.heat.v1*;version="${project.version}"</jclouds.osgi.export>
-        <jclouds.osgi.import>
-            org.jclouds.rest.internal;version="${project.version}",
-            org.jclouds*;version="${project.version}",
-            *
-        </jclouds.osgi.import>
+        <jclouds.osgi.import>org.jclouds*;version="${project.version}",*</jclouds.osgi.import>
     </properties>
 
-    <!--<repositories>-->
-        <!--<repository>-->
-            <!--<id>apache-snapshots</id>-->
-            <!--<url>https://repository.apache.org/content/repositories/snapshots</url>-->
-            <!--<releases>-->
-                <!--<enabled>false</enabled>-->
-            <!--</releases>-->
-            <!--<snapshots>-->
-                <!--<enabled>true</enabled>-->
-            <!--</snapshots>-->
-        <!--</repository>-->
-    <!--</repositories>-->
+    <repositories>
+        <repository>
+            <id>apache-snapshots</id>
+            <url>https://repository.apache.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20090211</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.jclouds.api</groupId>
             <artifactId>openstack-keystone</artifactId>
-      <version>${project.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.jclouds</groupId>
             <artifactId>jclouds-core</artifactId>
-      <version>${project.version}</version>
+            <version>${project.parent.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.jclouds.api</groupId>
             <artifactId>openstack-keystone</artifactId>
-      <version>${project.version}</version>
+            <version>${project.parent.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
-          <groupId>org.assertj</groupId>
-          <artifactId>assertj-core</artifactId>
-          <version>1.6.1</version>
-          <scope>test</scope>
-      </dependency>
-      <dependency>
             <groupId>org.apache.jclouds.driver</groupId>
-          <artifactId>jclouds-sshj</artifactId>
-          <version>${project.version}</version>
-          <scope>test</scope>
-      </dependency>
-      <dependency>
-          <groupId>org.apache.jclouds.driver</groupId>
             <artifactId>jclouds-slf4j</artifactId>
-      <version>${project.version}</version>
+            <version>${project.parent.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -112,13 +92,11 @@
             <groupId>com.squareup.okhttp</groupId>
             <artifactId>mockwebserver</artifactId>
             <scope>test</scope>
-      <exclusions>
-        <!-- provided by the jclouds-bouncycastle driver -->
-        <exclusion>
-          <groupId>org.bouncycastle</groupId>
-          <artifactId>bcprov-jdk15on</artifactId>
-        </exclusion>
-      </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.google.auto.value</groupId>
@@ -126,15 +104,16 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.google.auto.service</groupId>
-            <artifactId>auto-service</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!--dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <scope>test</scope>
-        </dependency-->
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -160,8 +139,6 @@
                                         <test.openstack-heat.identity>${test.openstack-heat.identity}</test.openstack-heat.identity>
                                         <test.openstack-heat.credential>${test.openstack-heat.credential}</test.openstack-heat.credential>
                                         <test.jclouds.keystone.credential-type>${test.jclouds.keystone.credential-type}</test.jclouds.keystone.credential-type>
-                                        <jclouds.blobstore.httpstream.url>${jclouds.blobstore.httpstream.url}</jclouds.blobstore.httpstream.url>
-                                        <jclouds.blobstore.httpstream.md5>${jclouds.blobstore.httpstream.md5}</jclouds.blobstore.httpstream.md5>
                                     </systemPropertyVariables>
                                 </configuration>
                             </execution>
