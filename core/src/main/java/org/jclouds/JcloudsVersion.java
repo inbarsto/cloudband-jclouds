@@ -41,9 +41,10 @@ public class JcloudsVersion {
      * see http://semver.org.
      */
     private static final Pattern SEMANTIC_VERSION_PATTERN =
-        Pattern.compile("(\\d+)\\.(\\d+)\\.(\\d+)(?:-(alpha|beta|rc)\\.(\\d+)|-SNAPSHOT)?");
+        Pattern.compile("(\\d+)\\.(\\d+)\\.(\\d+)(?:-(alpha|beta|CB|rc)\\-(\\d+)|-SNAPSHOT)?");
     private static final String ALPHA_VERSION_IDENTIFIER = "alpha";
     private static final String BETA_VERSION_IDENTIFIER = "beta";
+    private static final String CB_VERSION_IDENTIFIER = "CB";
 
     private static final JcloudsVersion INSTANCE = new JcloudsVersion();
 
@@ -116,7 +117,8 @@ public class JcloudsVersion {
                 betaVersion = null;
                 releaseCandidate = false;
                 releaseCandidateVersion = null;
-            } else if (alphaOrBetaOrReleaseCandidateVersionIfPresent.equals(BETA_VERSION_IDENTIFIER)) {
+            } else if (alphaOrBetaOrReleaseCandidateVersionIfPresent.equals(BETA_VERSION_IDENTIFIER) ||
+                  alphaOrBetaOrReleaseCandidateVersionIfPresent.equals(CB_VERSION_IDENTIFIER)) {
                 alpha = false;
                 alphaVersion = null;
                 beta = true;
