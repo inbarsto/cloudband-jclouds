@@ -23,9 +23,11 @@ import org.jclouds.location.Region;
 import org.jclouds.location.functions.RegionToEndpoint;
 import org.jclouds.openstack.heat.v1.features.ResourceApi;
 import org.jclouds.openstack.heat.v1.features.StackApi;
+import org.jclouds.openstack.heat.v1.features.TemplateApi;
 import org.jclouds.rest.annotations.Delegate;
 import org.jclouds.rest.annotations.EndpointParam;
 
+import com.google.common.annotations.Beta;
 import com.google.inject.Provides;
 
 /**
@@ -34,15 +36,21 @@ import com.google.inject.Provides;
  */
 public interface HeatApi extends Closeable {
 
-   @Provides
-   @Region
-   Set<String> getConfiguredRegions();
+    @Provides
+    @Region
+    Set<String> getConfiguredRegions();
 
-   /**
-    * Provides access to Resource features.
-    */
-   @Delegate
-   ResourceApi getResourceApi(@EndpointParam(parser = RegionToEndpoint.class) String region);
+    /**
+     * Provides access to Resource features.
+     */
+    @Delegate
+    ResourceApi getResourceApi(@EndpointParam(parser = RegionToEndpoint.class) String region);
+
+    /**
+     * Provides access to Template validation.
+     */
+    @Delegate
+    TemplateApi getTemplateApi(@EndpointParam(parser = RegionToEndpoint.class) String region);
 
     /**
      * Provides access to Stack features.
@@ -50,3 +58,4 @@ public interface HeatApi extends Closeable {
     @Delegate
     StackApi getStackApi(@EndpointParam(parser = RegionToEndpoint.class) String region);
 }
+
