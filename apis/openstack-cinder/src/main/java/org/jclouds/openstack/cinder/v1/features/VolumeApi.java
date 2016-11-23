@@ -68,7 +68,7 @@ public interface VolumeApi {
 
    @Named("volume:list")
    @GET
-   @Path("/volumes")
+//   @Path("/volumes")
    @SelectJson("volumes")
    @Consumes(MediaType.APPLICATION_JSON)
    @Fallback(EmptyFluentIterableOnNotFoundOr404.class)
@@ -88,7 +88,7 @@ public interface VolumeApi {
 
    @Named("volume:list")
    @GET
-   @Path("/volumes/detail")
+   @Path("/detail")
    @SelectJson("volumes")
    @Consumes(MediaType.APPLICATION_JSON)
    @Fallback(EmptyFluentIterableOnNotFoundOr404.class)

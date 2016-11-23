@@ -60,7 +60,7 @@ public class VolumeAndSnapshotApiLiveTest extends BaseCinderApiLiveTest<CinderAp
    @Override
    public void setup() {
       super.setup();
-      region = Iterables.getLast(api.getConfiguredRegions(), "nova");
+      region = Iterables.getLast(api.getConfiguredRegions(), "regionOne");
       volumeApi = api.getVolumeApi(region);
       snapshotApi = api.getSnapshotApi(region);
    }
@@ -106,7 +106,7 @@ public class VolumeAndSnapshotApiLiveTest extends BaseCinderApiLiveTest<CinderAp
       assertTrue(foundIt, "Failed to find the volume we created in list() response");
    }
 
-   @Test(dependsOnMethods = "testCreateVolume")
+   @Test//(dependsOnMethods = "testCreateVolume")
    public void testListVolumesInDetail() {
       Set<? extends Volume> volumes = volumeApi.listInDetail().toSet();
       assertNotNull(volumes);
