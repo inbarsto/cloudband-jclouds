@@ -29,6 +29,7 @@ public class BaseCinderApiLiveTest<T extends Closeable> extends BaseApiLiveTest<
 
 
    public BaseCinderApiLiveTest(String provider) {
+      super();
       this.provider = provider;
    }
 
