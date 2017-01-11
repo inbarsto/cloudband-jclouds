@@ -72,7 +72,7 @@ public abstract class StackResource {
     */
    public abstract Date getUpdated();
 
-   public abstract Attributes getAttributes();
+   @Nullable public abstract Attributes getAttributes();
 
    /**
     * @return Specifies the self-navigating JSON document paths.
@@ -81,7 +81,7 @@ public abstract class StackResource {
 
    @SerializedNames({"resource_name", "logical_resource_id", "resource_status_reason", "updated_time", "required_by", "resource_status", "physical_resource_id", "resource_type","attributes", "links"})
    private static StackResource create(String name, String logicalResourceId, String statusReason, Date updated, @Nullable Set<String> requiredBy,
-                                       StackResourceStatus status, String physicalResourceId, String resourceType, Attributes attributes, Set<Link> links) {
+                                       StackResourceStatus status, String physicalResourceId, String resourceType, @Nullable Attributes attributes, @Nullable Set<Link> links) {
       return new AutoValue_StackResource(
               name,
               logicalResourceId,
@@ -92,7 +92,7 @@ public abstract class StackResource {
               resourceType,
               updated,
               attributes,
-              ImmutableSet.copyOf(links));
+              links != null ? ImmutableSet.copyOf(links) : ImmutableSet.<Link>of());
    }
 
 }

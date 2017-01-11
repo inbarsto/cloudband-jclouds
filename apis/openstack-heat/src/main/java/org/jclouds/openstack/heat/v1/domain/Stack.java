@@ -116,7 +116,7 @@ public abstract class Stack {
     */
    public abstract boolean isDisableRollback();
 
-   public abstract String getParent();
+   @Nullable public abstract String getParent();
 
    /**
     * @return Specifies the self-navigating JSON document paths.
